@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of browser: Data can be accessed by server. Server creates new note object and add it to array.
+
+    server->>browser: status 302 (URL redirect)
+
+    Note right of server: server asks the browser to do a new HTTP GET request
+
+    Note right of browser: browser reloads the Notes page and causes three more HTTP requests:
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+
+    Note right of browser: browser asks for css file
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+
+    Note right of browser: browser asks for js file
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+
+    Note right of browser: browser asks for raw data of the notes
+

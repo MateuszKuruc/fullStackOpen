@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser-->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser:  css file
+    browser-->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: spa.js file 
+    browser executes js code which fetches notes from server 
+
+    browser-->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: sends JSON data
+    
+    browser: js code adds HTML elements for displaying notes by using DOM-API
+
+    Note right of browser: site is now displayed

@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    
+    browser: note created by the user
+    Note right of browser: browser stays on the same page and does not send any more HTTP requests
+
+    browser: JS code is used in the browser to handle form's submit event. With e.preventDefault(), the default form submit is cancelled, so the data is not sent to the server (no GET request from browser)
+
+    browser: event handler creates a new note and adds it to the array/list of notes
+
+    browser: note list is rerendered 
+
+    browser-->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    data (new note) sent to the server in the JSON format
+    server-->>browser: status 201 created
+
+   
