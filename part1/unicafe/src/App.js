@@ -34,19 +34,31 @@ const App = () => {
     setTotal(total + 1);
   };
 
+  if (total !== 0) {
+    return (
+      <div>
+        <Title title={title} />
+      <Button handleClick={handleGoodFeedback} text="good" />
+      <Button handleClick={handleNeutralFeedback} text="neutral" />
+      <Button handleClick={handleBadFeedback} text="bad" />
+      <Title title={statistics} />
+      <Stats value={good} text="good" />
+      <Stats value={neutral} text="neutral" />
+      <Stats value={bad} text="bad" />
+      <Stats total={total} text="total" />
+      <Stats value={calcAverage()} text="average" />
+      <Stats value={calcPositive()} text='positive' percent='%' />
+      </div>
+    )
+  }
   return (
     <div>
       <Title title={title} />
       <Button handleClick={handleGoodFeedback} text="good" />
       <Button handleClick={handleNeutralFeedback} text="neutral" />
       <Button handleClick={handleBadFeedback} text="bad" />
-      <Statistics stats={statistics} />
-      <Stats value={good} text="good" />
-      <Stats value={neutral} text="neutral" />
-      <Stats value={bad} text="bad" />
-      <Stats value={total} text="total" />
-      <Stats value={calcAverage()} text="average" />
-      <Stats value={calcPositive()} text='positive' percent='%' />
+      <Title title={statistics} />
+      <Stats text='No feedback given' />
     </div>
   );
 };
@@ -56,21 +68,25 @@ const Title = (props) => (
     <h1>{props.title}</h1>
   </div>
 );
-const Statistics = (props) => (
-  <div>
-    <h1>{props.stats}</h1>
-  </div>
-);
+
 const Button = (props) => {
   return <button onClick={props.handleClick}>{props.text}</button>;
 };
 
-const Stats = ({ value, text, percent }) => {
+const Stats = (props) => {
+
   return (
+    <div>
+    <h1>{props.header}</h1>
     <p>
-      {text} {value} {percent}
+      {props.text} {props.value} {props.total} {props.percent}
     </p>
+    </div>
   );
+ 
 };
+
+
+
 
 export default App;
