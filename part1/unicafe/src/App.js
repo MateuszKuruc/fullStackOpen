@@ -10,14 +10,14 @@ const App = () => {
   const [total, setTotal] = useState(0);
 
   const calcAverage = () => {
-    if (total === 0) return
+    if (total === 0) return;
     return Number((good * 1 + neutral * 0 + bad * -1) / total);
   };
 
   const calcPositive = () => {
-    if (total === 0) return
-    return (Number((good / total) * 100));
-  }
+    if (total === 0) return;
+    return Number((good / total) * 100);
+  };
 
   const handleGoodFeedback = () => {
     setGood(good + 1);
@@ -34,23 +34,6 @@ const App = () => {
     setTotal(total + 1);
   };
 
-  if (total !== 0) {
-    return (
-      <div>
-        <Title title={title} />
-      <Button handleClick={handleGoodFeedback} text="good" />
-      <Button handleClick={handleNeutralFeedback} text="neutral" />
-      <Button handleClick={handleBadFeedback} text="bad" />
-      <Title title={statistics} />
-      <Stats value={good} text="good" />
-      <Stats value={neutral} text="neutral" />
-      <Stats value={bad} text="bad" />
-      <Stats total={total} text="total" />
-      <Stats value={calcAverage()} text="average" />
-      <Stats value={calcPositive()} text='positive' percent='%' />
-      </div>
-    )
-  }
   return (
     <div>
       <Title title={title} />
@@ -58,7 +41,14 @@ const App = () => {
       <Button handleClick={handleNeutralFeedback} text="neutral" />
       <Button handleClick={handleBadFeedback} text="bad" />
       <Title title={statistics} />
-      <Stats text='No feedback given' />
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={total}
+        average={calcAverage()}
+        positive={calcPositive()}
+      />
     </div>
   );
 };
@@ -73,20 +63,30 @@ const Button = (props) => {
   return <button onClick={props.handleClick}>{props.text}</button>;
 };
 
-const Stats = (props) => {
-
+const Statistics = (props) => {
+  if (props.total === 0) {
+    return 'No feedback given'
+  }
   return (
-    <div>
-    <h1>{props.header}</h1>
-    <p>
-      {props.text} {props.value} {props.total} {props.percent}
-    </p>
-    </div>
-  );
- 
-};
+    <table>
+      <tbody>
+    <StatisticLine text='good' value={props.good} />
+    <StatisticLine text='neutral' value={props.neutral} />
+    <StatisticLine text='bad' value={props.bad} />
+    <StatisticLine text='average' value={props.average} />
+    <StatisticLine text='positive' value={props.positive} percent={'%'}/>
+    </tbody>
+    </table>
+  )
+}
 
-
-
+const StatisticLine = (props) => {
+  return (
+   <tr>
+    <td>{props.text}</td>
+    <td>{props.value} {props.percent}</td>
+   </tr>
+  )
+}
 
 export default App;
