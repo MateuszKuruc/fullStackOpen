@@ -30,11 +30,25 @@ const App = () => {
     setSelected(randomNumber);
     console.log("clicked", randomNumber);
   };
+
+  const highestVoted = () => {
+    const highestScore = Math.max(...votes);
+    console.log(highestScore);
+    const highestScoreIndex = votes.indexOf(highestScore);
+    console.log(highestScoreIndex);
+    return highestScoreIndex;
+  };
+  // highestVoted();
+
   return (
     <div>
       <Anecdote item={anecdotes[selected]} votes={votes[selected]} />
       <Button handleClick={handleVote} text="vote" />
       <Button handleClick={handleChange} text="next anecdote" />
+      <MostVoted
+        item={anecdotes[highestVoted()]}
+        votes={votes[highestVoted()]}
+      />
     </div>
   );
 };
@@ -46,6 +60,17 @@ const Button = (props) => {
 const Anecdote = (props) => {
   return (
     <div>
+      <h1>Anecdote of the day</h1>
+      <p>{props.item}</p>
+      <p>{props.votes}</p>
+    </div>
+  );
+};
+
+const MostVoted = (props) => {
+  return (
+    <div>
+      <h1>Anecdote with most votes</h1>
       <p>{props.item}</p>
       <p>{props.votes}</p>
     </div>
