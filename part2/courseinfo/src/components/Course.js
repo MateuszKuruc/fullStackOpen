@@ -1,22 +1,19 @@
-const Course = ({ course }) => {
-  const total = course.parts
-    .map((part) => part.exercises)
-    .reduce((total, exercises) => total + exercises, 0);
-  console.log(total);
+import Header from "./Header";
+import Content from "./Content";
+import Total from "./Total";
 
+const Course = ({ courses }) => {
   return (
     <div>
-      <h1>{course.name}</h1>
-      <ul>
-        {course.parts.map((part) => (
-          <li key={part.id}>
-            {part.name} {part.exercises}
-          </li>
-        ))}
-      </ul>
-      <h2>total of {total}</h2>
+      {courses.map((course) => (
+        <div key={course.id}>
+          <Header name={course.name} />
+          <Content parts={course.parts} />
+          <Total parts={course.parts} />
+        </div>
+      ))}
     </div>
   );
 };
 
-export default Course;
+export { Course };
