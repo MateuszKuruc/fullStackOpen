@@ -4,7 +4,6 @@ import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import axios from "axios";
 
-
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
@@ -12,15 +11,12 @@ const App = () => {
   const [showAll, setShowAll] = useState(true);
   const [searchPerson, setSearchPerson] = useState("");
 
-
   useEffect(() => {
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
+    axios.get("http://localhost:3001/persons").then((response) => {
       const persons = response.data;
       setPersons(persons);
-    })
-  }, [])
+    });
+  }, []);
 
   const createNewName = (event) => {
     setNewName(event.target.value);
@@ -42,10 +38,10 @@ const App = () => {
         number: newNumber,
       };
       axios
-      .post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
-      })
+        .post("http://localhost:3001/persons", personObject)
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+        });
     }
     setNewName("");
     setNewNumber("");
