@@ -5,6 +5,7 @@ import Persons from "./components/Persons";
 import axios from "axios";
 import serviceNumbers from "./services/numbers";
 
+
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
@@ -13,13 +14,10 @@ const App = () => {
   const [searchPerson, setSearchPerson] = useState("");
 
   useEffect(() => {
-    serviceNumbers
-    .getAll()
-    .then(initialPersons => {
-      setPersons(initialPersons)
-    })
-
-  }, [])
+    serviceNumbers.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  }, []);
 
   const createNewName = (event) => {
     setNewName(event.target.value);
@@ -41,12 +39,9 @@ const App = () => {
         number: newNumber,
       };
 
-      serviceNumbers
-      .create(personObject)
-      .then(returnedPerson => {
-        setPersons(persons.concat(returnedPerson))
-      })
-
+      serviceNumbers.create(personObject).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+      });
     }
     setNewName("");
     setNewNumber("");
@@ -67,6 +62,21 @@ const App = () => {
         person.name.toLowerCase().includes(searchPerson.toLowerCase())
       );
 
+  const deletePerson = (person) => {
+    const id = person.id;
+    if (window.confirm(`Do you want to delete ${person.name}?`))
+      serviceNumbers
+      .deletePerson(id)
+        .then((response) => {
+          serviceNumbers.getAll().then((initialPersons) => {
+            setPersons(initialPersons);
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -83,7 +93,7 @@ const App = () => {
         />
       </form>
       <h2>Numbers</h2>
-      <Persons display={personsToShow} />
+      <Persons display={personsToShow} deleteData={deletePerson} />
     </div>
   );
 };
