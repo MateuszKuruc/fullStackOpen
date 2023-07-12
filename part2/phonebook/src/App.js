@@ -5,7 +5,6 @@ import Persons from "./components/Persons";
 import axios from "axios";
 import serviceNumbers from "./services/numbers";
 
-
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
@@ -30,7 +29,19 @@ const App = () => {
       alert("Please enter all details");
       return;
     } else if (persons.some((person) => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
+      if (window.confirm(`Do you want to change ${newName}'s number?`)) {
+        const personAlt = persons.find((person) => newName === person.name);
+        const url = `http://localhost:3001/persons/${personAlt.id}`;
+        const changedPerson = { ...personAlt, number: newNumber };
+
+        serviceNumbers.change(url, changedPerson).then((updatedPerson) => {
+          setPersons(
+            persons.map((person) =>
+              person.id !== personAlt.id ? person : updatedPerson
+            )
+          );
+        });
+      } else return;
     } else if (persons.some((person) => person.number === newNumber)) {
       alert(`${newNumber} is already added to phonebook`);
     } else {
@@ -66,7 +77,7 @@ const App = () => {
     const id = person.id;
     if (window.confirm(`Do you want to delete ${person.name}?`))
       serviceNumbers
-      .deletePerson(id)
+        .deletePerson(id)
         .then((response) => {
           serviceNumbers.getAll().then((initialPersons) => {
             setPersons(initialPersons);
