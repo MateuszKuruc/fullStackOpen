@@ -5,46 +5,35 @@ import noteService from "./services/notes";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("a new note...");
+  const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
       setNotes(initialNotes);
     });
-  }, []);
+  });
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/notes").then((response) => {
-  //     setNotes(response.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios.get("http://localhost:3001/notes").then((response) => {
+      setNotes(response.data);
+    });
+  }, []);
 
   const addNote = (event) => {
     event.preventDefault();
-    console.log("button clicked", event.target);
     const noteObject = {
       content: newNote,
       important: Math.random() < 0.5,
-      // id: notes.length + 1,
     };
 
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote));
-      setNotes("");
+      setNewNote("");
     });
-
-    // axios.post("http://localhost:3001/notes", noteObject).then((response) => {
-    //   setNotes(notes.concat(response.data));
-    //   setNewNote("");
-    // });
-
-    // setNotes(notes.concat(noteObject));
-    // setNewNote("");
   };
 
   const handleNoteChange = (event) => {
-    console.log(event.target.value);
     setNewNote(event.target.value);
   };
 
@@ -56,13 +45,16 @@ const App = () => {
     const note = notes.find((n) => n.id === id);
     const changedNote = { ...note, important: !note.important };
 
-    noteService.update(id, changedNote).then((returnedNote) => {
-      setNotes(notes.map((n) => (n.id !== n ? n : returnedNote)));
-    });
-
-    // axios.put(url, changedNote).then(response => {
-    //   setNotes(notes.map(n => n.id !== id ? n : response.data))
-    // })
+    noteService
+    .update(id, changedNote).then((returnedNote) => {
+      setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)));
+    })
+    .catch(error => {
+      alert(
+        `the note '${note.content}' was already deleted from the server`
+      )
+      setNotes(notes.filter(n => n.id !== id))
+    })
   };
 
   return (
