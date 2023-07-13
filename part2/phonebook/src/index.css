@@ -10,3 +10,12 @@ h2 {
     margin-bottom: 10px;
     border: solid 5px green;
 }
+
+.error {
+    color: red;
+    background-color: lightgray;
+    padding: 10px;
+    font-size: 26px;
+    margin-bottom: 10px;
+    border: solid 5px red;
+}

@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "mati",
-      "number": "666",
+      "number": "888",
       "id": 1
     },
     {
@@ -14,11 +14,6 @@
       "name": "rabarbar",
       "number": "777",
       "id": 4
-    },
-    {
-      "name": "Bubinson",
-      "number": "888",
-      "id": 7
     }
   ]
 }

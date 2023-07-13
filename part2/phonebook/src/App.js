@@ -5,6 +5,7 @@ import Persons from "./components/Persons";
 import axios from "axios";
 import serviceNumbers from "./services/numbers";
 import Notification from "./components/Notification";
+import Error from "./components/Error";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,6 +14,7 @@ const App = () => {
   const [showAll, setShowAll] = useState(true);
   const [searchPerson, setSearchPerson] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     serviceNumbers.getAll().then((initialPersons) => {
@@ -36,17 +38,29 @@ const App = () => {
         const url = `http://localhost:3001/persons/${personAlt.id}`;
         const changedPerson = { ...personAlt, number: newNumber };
 
-        serviceNumbers.change(url, changedPerson).then((updatedPerson) => {
-          setPersons(
-            persons.map((person) =>
-              person.id !== personAlt.id ? person : updatedPerson
-            )
-          );
-        });
-        setSuccessMessage(`${changedPerson.name}'s phone number has been updated!`)
-        setTimeout(() => {
-          setSuccessMessage(null);
-        }, 3000)
+        serviceNumbers
+          .change(url, changedPerson)
+          .then((updatedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== personAlt.id ? person : updatedPerson
+              )
+            );
+            setSuccessMessage(
+              `${changedPerson.name}'s phone number has been updated!`
+            );
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 3000);
+          })
+          .catch((error) => {
+            setErrorMessage(
+              `${changedPerson.name} has already been deleted from server!`
+            );
+            serviceNumbers.getAll().then((initialPersons) => {
+              setPersons(initialPersons);
+            });
+          });
       } else return;
     } else if (persons.some((person) => person.number === newNumber)) {
       alert(`${newNumber} is already added to phonebook`);
@@ -59,11 +73,12 @@ const App = () => {
       serviceNumbers.create(personObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
       });
+      setSuccessMessage(`Added ${newName}`);
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 3000);
     }
-    setSuccessMessage(`Added ${newName}`)
-    setTimeout(() => {
-      setSuccessMessage(null)
-    }, 3000);
+
     setNewName("");
     setNewNumber("");
   };
@@ -92,12 +107,12 @@ const App = () => {
           serviceNumbers.getAll().then((initialPersons) => {
             setPersons(initialPersons);
           });
-          setSuccessMessage(`Deleted ${person.name}`)
+          setSuccessMessage(`Deleted ${person.name}`);
           setTimeout(() => {
-            setSuccessMessage(null)
+            setSuccessMessage(null);
           }, 3000);
         })
-        
+
         .catch((error) => {
           console.log(error);
         });
@@ -107,6 +122,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={successMessage} />
+      <Error error={errorMessage} />
       <Filter handleInput={createSearch} />
       <h2>Add new</h2>
       <form>
