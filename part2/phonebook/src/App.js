@@ -4,6 +4,7 @@ import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import axios from "axios";
 import serviceNumbers from "./services/numbers";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [searchPerson, setSearchPerson] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     serviceNumbers.getAll().then((initialPersons) => {
@@ -41,6 +43,10 @@ const App = () => {
             )
           );
         });
+        setSuccessMessage(`${changedPerson.name}'s phone number has been updated!`)
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 3000)
       } else return;
     } else if (persons.some((person) => person.number === newNumber)) {
       alert(`${newNumber} is already added to phonebook`);
@@ -54,6 +60,10 @@ const App = () => {
         setPersons(persons.concat(returnedPerson));
       });
     }
+    setSuccessMessage(`Added ${newName}`)
+    setTimeout(() => {
+      setSuccessMessage(null)
+    }, 3000);
     setNewName("");
     setNewNumber("");
   };
@@ -82,7 +92,12 @@ const App = () => {
           serviceNumbers.getAll().then((initialPersons) => {
             setPersons(initialPersons);
           });
+          setSuccessMessage(`Deleted ${person.name}`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 3000);
         })
+        
         .catch((error) => {
           console.log(error);
         });
@@ -91,6 +106,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} />
       <Filter handleInput={createSearch} />
       <h2>Add new</h2>
       <form>

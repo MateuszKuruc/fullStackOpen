@@ -2,13 +2,8 @@
   "persons": [
     {
       "name": "mati",
-      "number": "123",
+      "number": "666",
       "id": 1
-    },
-    {
-      "name": "pamsi",
-      "number": "456",
-      "id": 2
     },
     {
       "name": "Puszkinson Crusoe",
@@ -19,6 +14,11 @@
       "name": "rabarbar",
       "number": "777",
       "id": 4
+    },
+    {
+      "name": "Bubinson",
+      "number": "888",
+      "id": 7
     }
   ]
 }
