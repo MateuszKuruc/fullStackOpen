@@ -1,3 +1,5 @@
+import Weather from "./Weather";
+
 const DisplayDetails = ({ filteredCountries }) => {
   if (filteredCountries.length === 1) {
     const country = filteredCountries[0];
@@ -9,6 +11,7 @@ const DisplayDetails = ({ filteredCountries }) => {
         <h3>Flag: {country.flag}</h3>
         <h3>Continent: {country.continents}</h3>
         <h3>Population: {country.population}</h3>
+        <Weather capitalCity={country.capital} />
       </div>
     );
   }

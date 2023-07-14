@@ -3,6 +3,8 @@ import axios from "axios";
 import Filter from "./components/Filter";
 import DisplayDetails from "./components/DisplayDetails";
 
+console.log(process.env.REACT_APP_API_KEY);
+
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
