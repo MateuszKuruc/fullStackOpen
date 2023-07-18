@@ -70,13 +70,23 @@ const App = () => {
         number: newNumber,
       };
 
-      serviceNumbers.create(personObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-      });
-      setSuccessMessage(`Added ${newName}`);
-      setTimeout(() => {
-        setSuccessMessage(null);
-      }, 3000);
+      serviceNumbers
+        .create(personObject)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          if (personObject.name.length >= 3) {
+            setSuccessMessage(`Added ${newName}`);
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          setErrorMessage(`Name needs to be at least 3 characters long`);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 3000);
+        });
     }
 
     setNewName("");
