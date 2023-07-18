@@ -55,8 +55,11 @@ const App = () => {
           })
           .catch((error) => {
             setErrorMessage(
-              `${changedPerson.name} has already been deleted from server!`
+              `Invalid data: make sure the number has at least 8 characters and uses hyphen after initial 2 or 3 numbers!`
             );
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 3000);
             serviceNumbers.getAll().then((initialPersons) => {
               setPersons(initialPersons);
             });
@@ -82,10 +85,12 @@ const App = () => {
           }
         })
         .catch((error) => {
-          setErrorMessage(`Name needs to be at least 3 characters long`);
+          
+          setErrorMessage(`Name needs to be at least 3 and number 8 characters long, with initial 2 or 3 numbers followed by hyphen`);
           setTimeout(() => {
             setErrorMessage(null);
           }, 3000);
+  
         });
     }
 
