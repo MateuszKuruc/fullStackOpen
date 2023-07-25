@@ -70,6 +70,7 @@ const App = () => {
         username,
         password,
       });
+      noteService.setToken(user.token);
       setUser(user);
       setUsername("");
       setPassword("");
@@ -116,12 +117,13 @@ const App = () => {
     <div>
       <h1>Notes</h1>
       <Notification message={errorMessage} />
-      {/* {user === null && loginForm()};{user !== null && noteForm()}; */}
-      {user === null ? loginForm() : noteForm()}
+
+      {!user && loginForm()} 
       {user && <div>
         <p>{user.name} logged in</p>
-        {noteForm}
-        </div>}
+          {noteForm()}
+        </div>
+      } 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? "important" : "all"}
