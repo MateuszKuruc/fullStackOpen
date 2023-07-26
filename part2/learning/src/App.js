@@ -98,12 +98,12 @@ const App = () => {
     }
   };
 
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={newNote} onChange={handleNoteChange} />
-      <button type="submit">save</button>
-    </form>
-  );
+  // const noteForm = () => (
+  //   <form onSubmit={addNote}>
+  //     <input value={newNote} onChange={handleNoteChange} />
+  //     <button type="submit">save</button>
+  //   </form>
+  // );
 
   return (
     <div>
@@ -124,6 +124,13 @@ const App = () => {
       {user && (
         <div>
           <p>{user.name} logged in</p>
+          <Togglable buttonLabel='new note'>
+            <NoteForm
+            onSubmit={addNote}
+            value={newNote}
+            handleChange={handleNoteChange}
+            />
+          </Togglable>
         </div>
       )}
       <div>
