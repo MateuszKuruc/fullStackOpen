@@ -31,10 +31,16 @@ describe("Note app", function () {
 
   describe("when logged in", function () {
     beforeEach(function () {
-      cy.contains("log in").click();
-      cy.get("#username").type("mati");
-      cy.get("#password").type("mati123");
-      cy.get("#login-button").click();
+      cy.request("POST", "http://localhost:3001/api/login", {
+        username: "mati",
+        password: "mati123",
+      }).then((response) => {
+        localStorage.setItem(
+          "loggedNoteappUser",
+          JSON.stringify(response.body)
+        );
+        cy.visit("http://localhost:3000");
+      });
     });
 
     it("a new note can be created", function () {
@@ -61,7 +67,7 @@ describe("Note app", function () {
     });
   });
 
-  it.only("login fails with wrong password", function () {
+  it("login fails with wrong password", function () {
     cy.contains("log in").click();
     cy.get("#username").type("mati");
     cy.get("#password").type("wrong");
