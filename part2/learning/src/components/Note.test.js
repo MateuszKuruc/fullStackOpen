@@ -4,13 +4,14 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Note from "./Note";
 
-test.skip("renders content", () => {
+test("renders content", () => {
   const note = {
     content: "Component testing is done with react-testing-library",
     important: true,
   };
 
   render(<Note note={note} />);
+  screen.debug();
 
   const element = screen.getByText(
     "Component testing is done with react-testing-library"
