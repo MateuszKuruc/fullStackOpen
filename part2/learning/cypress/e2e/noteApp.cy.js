@@ -31,16 +31,7 @@ describe("Note app", function () {
 
   describe("when logged in", function () {
     beforeEach(function () {
-      cy.request("POST", "http://localhost:3001/api/login", {
-        username: "mati",
-        password: "mati123",
-      }).then((response) => {
-        localStorage.setItem(
-          "loggedNoteappUser",
-          JSON.stringify(response.body)
-        );
-        cy.visit("http://localhost:3000");
-      });
+      cy.login({ username: "mati", password: "mati123" });
     });
 
     it("a new note can be created", function () {
