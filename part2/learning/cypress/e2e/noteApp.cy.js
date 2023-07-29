@@ -27,6 +27,14 @@ describe("Note app", function () {
       cy.contains("log in").click();
       cy.get("#username").type("mati");
       cy.get("#password").type("mati123");
+      cy.get("#login-button").click();
+    });
+
+    it("a new note can be created", function () {
+      cy.contains("new note").click();
+      cy.get("#note-input").type("a note created by cypress");
+      cy.contains("save").click();
+      cy.contains("a note created by cypress");
     });
   });
 });
