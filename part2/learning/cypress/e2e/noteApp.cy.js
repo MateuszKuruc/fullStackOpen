@@ -60,4 +60,13 @@ describe("Note app", function () {
       });
     });
   });
+
+  it.only("login fails with wrong password", function () {
+    cy.contains("log in").click();
+    cy.get("#username").type("mati");
+    cy.get("#password").type("wrong");
+    cy.get("#login-button").click();
+
+    cy.contains("Wrong credentials");
+  });
 });
