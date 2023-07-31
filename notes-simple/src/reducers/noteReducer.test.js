@@ -16,12 +16,6 @@ describe("noteReducer", () => {
     deepFreeze(state);
     const newState = noteReducer(state, action);
 
-    // if (action.type === "NEW_NOTE") {
-    //   state.push(action.data);
-
-    //   return state;
-    // }
-
     expect(newState).toHaveLength(1);
     expect(newState).toContainEqual(action.payload);
   });
