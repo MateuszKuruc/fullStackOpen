@@ -33,7 +33,7 @@ describe("unicafe reducer", () => {
     });
   });
 
-  test.only("ok is incremented", () => {
+  test("ok is incremented", () => {
     const action = {
       type: "OK",
     };
@@ -45,7 +45,24 @@ describe("unicafe reducer", () => {
     expect(newState).toEqual({
       good: 0,
       ok: 1,
-      bad: 0
-    })
+      bad: 0,
+    });
+  });
+
+  test.only("bad is incremented", () => {
+    const action = {
+      type: "BAD",
+    };
+
+    const state = initialState;
+
+    deepFreeze(state);
+    const newState = counterReducer(state, action);
+
+    expect(newState).toEqual({
+      good: 0,
+      ok: 0,
+      bad: 1,
+    });
   });
 });
