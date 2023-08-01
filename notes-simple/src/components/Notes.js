@@ -17,9 +17,10 @@ const Notes = () => {
   return (
     <ul>
       {notes.map((note) => (
-        <li key={note.id} onClick={() => toggleImportance(note.id)}>
-          {note.content} <strong>{note.important ? "important" : ""}</strong>
-        </li>
+        <Note
+          key={note.id}
+          handleClick={() => dispatch(toggleImportanceOf(note.id))}
+        />
       ))}
     </ul>
   );
