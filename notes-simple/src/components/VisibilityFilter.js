@@ -28,3 +28,4 @@ const VisibilityFilter = (props) => {
   );
 };
 
+export default VisibilityFilter;
