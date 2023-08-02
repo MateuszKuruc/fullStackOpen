@@ -10,7 +10,12 @@ const App = () => {
     dispatch(getVote(id));
   };
 
-const newNote = (content) =>
+  const newAnecdote = (event) => {
+    event.preventDefault();
+    const content = event.target.anecdote.value;
+    event.target.anecdote.value = "";
+    dispatch(createAnecdote(content));
+  };
 
   return (
     <div>
@@ -25,11 +30,11 @@ const newNote = (content) =>
         </div>
       ))}
       <h2>create new</h2>
-      <form onSubmit={createAnecdote}>
+      <form onSubmit={newAnecdote}>
         <div>
           <input name="anecdote" />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
       </form>
     </div>
   );
