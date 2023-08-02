@@ -1,4 +1,4 @@
-const filterChange = (searchWord) => {
+export const filterChange = (searchWord) => {
   return {
     type: "SET_FILTER",
     payload: searchWord,
@@ -13,3 +13,5 @@ const filterReducer = (state = "ALL", action) => {
       return state;
   }
 };
+
+export default filterReducer;
