@@ -1,7 +1,11 @@
+import { filterChange } from "../reducers/filterReducer";
+import { useDispatch } from "react-redux";
+
 const Filter = () => {
+  const dispatch = useDispatch();
   const handleChange = (event) => {
-    const searchWord = event.target.value
-    // input field value is in variable event.target.value
+    const searchWord = event.target.value;
+    dispatch(filterChange(searchWord))
   };
   const style = {
     marginBottom: 10,
