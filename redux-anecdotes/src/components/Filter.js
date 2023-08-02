@@ -5,7 +5,7 @@ const Filter = () => {
   const dispatch = useDispatch();
   const handleChange = (event) => {
     const searchWord = event.target.value;
-    dispatch(filterChange(searchWord))
+    dispatch(filterChange(searchWord));
   };
   const style = {
     marginBottom: 10,
