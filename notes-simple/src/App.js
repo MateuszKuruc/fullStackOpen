@@ -4,6 +4,7 @@ import NewNote from "./components/NewNote";
 const App = () => {
   return (
     <div>
+      <h2>create note</h2>
       <NewNote />
       <Notes />
     </div>
