@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const filterSlice = createSlice({
   name: "filter",
-  initialState: "ALL",
+  initialState: "",
   reducers: {
     filterChange(state, action) {
       const searchWord = action.payload;

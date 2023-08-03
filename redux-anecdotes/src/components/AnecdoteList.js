@@ -3,10 +3,14 @@ import { getVote } from "../reducers/anecdoteReducer";
 
 const AnecdoteList = () => {
   const anecdotes = useSelector((state) => {
-    if (state.filter === "ALL" || state.filter === "") {
-      return state.anecdotes;
+    if (state.filter === "") {
+      const anecdotesToDisplay = [...state.anecdotes];
+      return anecdotesToDisplay;
     }
-    return state.anecdotes.filter((a) => a.content.includes(state.filter));
+    const anecdotesToDisplay = [...state.anecdotes].filter((a) =>
+      a.content.includes(state.filter)
+    );
+    return anecdotesToDisplay;
   });
   const dispatch = useDispatch();
 
