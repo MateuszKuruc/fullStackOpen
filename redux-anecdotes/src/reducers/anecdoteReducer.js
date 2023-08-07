@@ -46,7 +46,7 @@ export const getVote = (id) => {
       votes: anecdoteToChange.votes + 1,
     };
 
-    const updatedAnecdote = await noteService.addVote(changedAnecdote);
+    await noteService.addVote(changedAnecdote);
 
     dispatch(setVotes(changedAnecdote));
   };
