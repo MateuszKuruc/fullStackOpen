@@ -12,7 +12,6 @@ const anecdoteSlice = createSlice({
       return action.payload;
     },
     setVotes(state, action) {
-      // state.push(action.payload)
       return state.map((a) =>
         a.id !== action.payload.id ? a : action.payload
       );
