@@ -40,17 +40,13 @@ export const createAnecdote = (content) => {
 export const getVote = (id) => {
   return async (dispatch) => {
     const anecdotes = await noteService.getAll();
-    console.log("anecdoted", anecdotes);
     const anecdoteToChange = anecdotes.find((a) => a.id === id);
-    console.log("tochange", anecdoteToChange);
     const changedAnecdote = {
       ...anecdoteToChange,
       votes: anecdoteToChange.votes + 1,
     };
-    console.log("changed", changedAnecdote);
 
     const updatedAnecdote = await noteService.addVote(changedAnecdote);
-    console.log(updatedAnecdote);
 
     dispatch(setVotes(changedAnecdote));
   };
