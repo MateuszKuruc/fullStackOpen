@@ -10,13 +10,10 @@ import { initializeAnecdotes } from "./reducers/anecdoteReducer";
 
 const App = () => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   noteService.getAll().then(anecdotes => dispatch(setAnecdotes(anecdotes)))
-  // }, [dispatch])
 
   useEffect(() => {
-    dispatch(initializeAnecdotes())
-  }, [dispatch])
+    dispatch(initializeAnecdotes());
+  }, [dispatch]);
 
   return (
     <div>
