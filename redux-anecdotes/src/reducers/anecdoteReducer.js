@@ -24,8 +24,11 @@ const anecdoteSlice = createSlice({
       };
       return state.map((a) => (a.id !== id ? a : changedAnecdote));
     },
+    setAnecdotes(state, action) {
+      return action.payload;
+    },
   },
 });
 
 export default anecdoteSlice.reducer;
-export const { createAnecdote, getVote } = anecdoteSlice.actions;
+export const { createAnecdote, getVote, setAnecdotes } = anecdoteSlice.actions;
