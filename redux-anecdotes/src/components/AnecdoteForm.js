@@ -4,7 +4,6 @@ import {
   createNotification,
   removeNotification,
 } from "../reducers/notificationReducer";
-import noteService from "../services/anecdotes";
 
 const NewAnecdote = () => {
   const dispatch = useDispatch();
@@ -13,8 +12,6 @@ const NewAnecdote = () => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     event.target.anecdote.value = "";
-    // const newAnecdote = await noteService.createNew(content)
-    // dispatch(createAnecdote(newAnecdote))
     dispatch(createAnecdote(content));
 
     dispatch(createNotification("New anecdote added!"));
