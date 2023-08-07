@@ -5,9 +5,9 @@ const noteSlice = createSlice({
   name: "notes",
   initialState: [],
   reducers: {
-    createNote(state, action) {
-      state.push(action.payload);
-    },
+    // createNote(state, action) {
+    //   state.push(action.payload);
+    // },
     toggleImportanceOf(state, action) {
       const id = action.payload;
       const noteToChange = state.find((n) => n.id === id);
@@ -29,7 +29,7 @@ const noteSlice = createSlice({
   },
 });
 
-export const { createNote, toggleImportanceOf, appendNote, setNotes } =
+export const { toggleImportanceOf, appendNote, setNotes } =
   noteSlice.actions;
 export default noteSlice.reducer;
 
@@ -39,3 +39,10 @@ export const initializeNotes = () => {
     dispatch(setNotes(notes));
   };
 };
+
+export const createNote = (content) => {
+  return async dispatch => {
+    const newNote = await noteService.createNew(content)
+    dispatch(appendNote(newNote))
+  }
+}
