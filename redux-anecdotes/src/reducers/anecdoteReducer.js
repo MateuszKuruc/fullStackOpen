@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import noteService from "../services/anecdotes";
 
 const anecdoteSlice = createSlice({
   name: "anecdotes",
@@ -24,3 +25,10 @@ const anecdoteSlice = createSlice({
 
 export default anecdoteSlice.reducer;
 export const { createAnecdote, getVote, setAnecdotes } = anecdoteSlice.actions;
+
+export const initializeAnecdotes = () => {
+  return async (dispatch) => {
+    const anecdotes = await noteService.getAll();
+    dispatch(setAnecdotes(anecdotes));
+  };
+};
