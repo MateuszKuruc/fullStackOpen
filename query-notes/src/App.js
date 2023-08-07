@@ -5,14 +5,27 @@ const App = () => {
   const queryClient = useQueryClient();
 
   const newNoteMutation = useMutation(createNote, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("notes");
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData("notes");
+      queryClient.setQueryData("notes", notes.concat(newNote));
     },
   });
 
+  // const updateNoteMutation = useMutation(updateNote, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries("notes");
+  //   },
+  // });
+
   const updateNoteMutation = useMutation(updateNote, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("notes");
+    onSuccess: (updatedNote) => {
+      const notes = queryClient.getQueryData("notes");
+      console.log(notes);
+      console.log(updatedNote);
+      queryClient.setQueryData(
+        "notes",
+        notes.map((note) => (note.id !== updatedNote.id ? note : updatedNote))
+      );
     },
   });
 
@@ -24,7 +37,7 @@ const App = () => {
   };
 
   const toggleImportance = (note) => {
-    updateNoteMutation.mutate({...note, important: !note.important})
+    updateNoteMutation.mutate({ ...note, important: !note.important });
     console.log("toggle importance of", note.id);
   };
 
