@@ -13,7 +13,6 @@ const NewAnecdote = () => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     event.target.anecdote.value = "";
-    // dispatch(createAnecdote(content));
     const newAnecdote = await noteService.createNew(content)
     dispatch(createAnecdote(newAnecdote))
 
