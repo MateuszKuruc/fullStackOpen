@@ -3,13 +3,13 @@ import { createAnecdote } from "../requests";
 import { useContext } from "react";
 import NotificationContext from "../NotificationContext";
 
-const AnecdoteForm = ({ type }) => {
+const AnecdoteForm = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext);
 
   const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation(createAnecdote, {
-    onSuccess: () => {
+    onSuccess: (newAnecdote) => {
       queryClient.invalidateQueries("anecdotes");
     },
   });
@@ -17,13 +17,27 @@ const AnecdoteForm = ({ type }) => {
   const onCreate = (event) => {
     event.preventDefault();
     const content = event.target.anecdote.value;
+
     event.target.anecdote.value = "";
 
-    newAnecdoteMutation.mutate({ content, votes: 0 });
-    notificationDispatch({ type: "CREATE", payload: content });
-    setTimeout(() => {
-      notificationDispatch({ type: "RESET" });
-    }, 5000);
+    if (content.length >= 5) {
+      newAnecdoteMutation.mutate({ content, votes: 0 });
+      notificationDispatch({
+        type: "SHOW",
+        payload: `New anecdote '${content}' was added!`,
+      });
+      setTimeout(() => {
+        notificationDispatch({ type: "HIDE" });
+      }, 5000);
+    } else {
+      notificationDispatch({
+        type: "SHOW",
+        payload: "Too short anecdote, must have length 5 or more!",
+      });
+      setTimeout(() => {
+        notificationDispatch({ type: 'HIDE' })
+      }, 5000);
+    }
   };
 
   return (

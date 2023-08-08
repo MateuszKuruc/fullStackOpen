@@ -9,13 +9,9 @@ import NotificationContext from "./NotificationContext";
 const App = () => {
   const notificationReducer = (state, action) => {
     switch (action.type) {
-      case "VOTE":
-        const content = action.payload.content;
-        return `you voted for '${content}'`;
-      case "CREATE":
-        const anecdote = action.payload;
-        return `you created anecdote: '${anecdote}'`;
-      case "RESET":
+      case "SHOW":
+        return action.payload;
+      case "HIDE":
         return "";
       default:
         return state;
@@ -39,10 +35,14 @@ const App = () => {
   });
 
   const handleVote = (anecdote) => {
+    console.log(anecdote);
     voteAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
-    notificationDispatch({ type: "VOTE", payload: anecdote });
+    notificationDispatch({
+      type: "SHOW",
+      payload: `Vote added for '${anecdote.content}'!`,
+    });
     setTimeout(() => {
-      notificationDispatch({ type: "RESET" });
+      notificationDispatch({ type: "HIDE" });
     }, 5000);
   };
 
