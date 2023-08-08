@@ -7,3 +7,8 @@ export const getAnecdotes = () => axios.get(baseUrl).then((res) => res.data);
 export const createAnecdote = (newAnecdote) => {
   axios.post(baseUrl, newAnecdote).then((res) => res.data);
 };
+
+export const updateVotes = (updatedNote) =>
+  axios
+    .put(`${baseUrl}/${updatedNote.id}`, updatedNote)
+    .then((res) => res.data);

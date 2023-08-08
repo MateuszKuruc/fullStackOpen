@@ -20,18 +20,6 @@ const App = () => {
     return <div>anecdote service not available due to problems in server</div>;
   }
 
- 
- 
-
-
-  // const anecdotes = [
-  //   {
-  //     "content": "If it hurts, do it more often",
-  //     "id": "47145",
-  //     "votes": 0
-  //   },
-  // ]
-
   const anecdotes = result.data;
 
   return (
