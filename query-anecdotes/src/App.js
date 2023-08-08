@@ -10,9 +10,13 @@ const App = () => {
   const notificationReducer = (state, action) => {
     switch (action.type) {
       case "VOTE":
-        return "you voted for ... anecdote";
+        const content = action.payload.content;
+        return `you voted for '${content}'`;
       case "CREATE":
-        return "new anecdote added!";
+        const anecdote = action.payload;
+        return `you created anecdote: '${anecdote}'`;
+      case "RESET":
+        return "";
       default:
         return state;
     }
@@ -26,6 +30,7 @@ const App = () => {
   const queryClient = useQueryClient();
 
   const result = useQuery("anecdotes", getAnecdotes);
+  console.log(result.data);
 
   const voteAnecdoteMutation = useMutation(updateVotes, {
     onSuccess: () => {
@@ -35,8 +40,10 @@ const App = () => {
 
   const handleVote = (anecdote) => {
     voteAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
-    // const type = 'VOTE'
-    notificationDispatch({ type: 'VOTE' })
+    notificationDispatch({ type: "VOTE", payload: anecdote });
+    setTimeout(() => {
+      notificationDispatch({ type: "RESET" });
+    }, 5000);
   };
 
   if (result.isLoading) {
@@ -55,16 +62,14 @@ const App = () => {
         <h3>Anecdote app</h3>
 
         <Notification notification={notification} />
-        <AnecdoteForm type='CREATE' />
+        <AnecdoteForm />
 
         {anecdotes.map((anecdote) => (
           <div key={anecdote.id}>
             <div>{anecdote.content}</div>
             <div>
               has {anecdote.votes}
-              <button onClick={() => handleVote(anecdote)} type="vote">
-                vote
-              </button>
+              <button onClick={() => handleVote(anecdote)}>vote</button>
             </div>
           </div>
         ))}

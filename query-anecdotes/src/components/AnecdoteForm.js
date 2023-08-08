@@ -4,7 +4,7 @@ import { useContext } from "react";
 import NotificationContext from "../NotificationContext";
 
 const AnecdoteForm = ({ type }) => {
-  const [notification, notificationDispatch] = useContext(NotificationContext)
+  const [notification, notificationDispatch] = useContext(NotificationContext);
 
   const queryClient = useQueryClient();
 
@@ -18,7 +18,12 @@ const AnecdoteForm = ({ type }) => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     event.target.anecdote.value = "";
+
     newAnecdoteMutation.mutate({ content, votes: 0 });
+    notificationDispatch({ type: "CREATE", payload: content });
+    setTimeout(() => {
+      notificationDispatch({ type: "RESET" });
+    }, 5000);
   };
 
   return (
@@ -26,7 +31,7 @@ const AnecdoteForm = ({ type }) => {
       <h3>create new</h3>
       <form onSubmit={onCreate}>
         <input name="anecdote" />
-        <button onClick={() => notificationDispatch({ type })} type="submit">create</button>
+        <button type="submit">create</button>
       </form>
     </div>
   );
