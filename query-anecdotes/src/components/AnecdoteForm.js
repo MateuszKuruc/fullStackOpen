@@ -1,7 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
 import { createAnecdote } from "../requests";
+import { useContext } from "react";
+import NotificationContext from "../NotificationContext";
 
-const AnecdoteForm = () => {
+const AnecdoteForm = ({ type }) => {
+  const [notification, notificationDispatch] = useContext(NotificationContext)
+
   const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation(createAnecdote, {
@@ -14,7 +18,6 @@ const AnecdoteForm = () => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     event.target.anecdote.value = "";
-    console.log("new anecdote");
     newAnecdoteMutation.mutate({ content, votes: 0 });
   };
 
@@ -23,7 +26,7 @@ const AnecdoteForm = () => {
       <h3>create new</h3>
       <form onSubmit={onCreate}>
         <input name="anecdote" />
-        <button type="submit">create</button>
+        <button onClick={() => notificationDispatch({ type })} type="submit">create</button>
       </form>
     </div>
   );
