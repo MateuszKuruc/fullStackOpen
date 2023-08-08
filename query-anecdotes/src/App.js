@@ -24,7 +24,7 @@ const App = () => {
 
   const [notification, notificationDispatch] = useReducer(
     notificationReducer,
-    "test message 123"
+    ""
   );
 
   const queryClient = useQueryClient();
