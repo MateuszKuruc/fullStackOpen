@@ -29,13 +29,12 @@ const useResource = (baseUrl) => {
 
   const create = async (resource) => {
     const response = await axios.post(baseUrl, resource);
-    setResources(response.data);
+    setResources(resources.concat(response.data));
   };
 
   const service = {
     create,
   };
-  console.log(resources);
 
   return [resources, service];
 };
