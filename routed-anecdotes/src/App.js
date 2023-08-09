@@ -175,7 +175,7 @@ const App = () => {
             home
           </Link>
           <Link style={padding} to="/create">
-            create
+            create new
           </Link>
           <Link style={padding} to="/about">
             about
