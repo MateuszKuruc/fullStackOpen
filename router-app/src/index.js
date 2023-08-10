@@ -129,7 +129,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
       <div>
         <Link style={padding} to="/">
           home
