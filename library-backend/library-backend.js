@@ -1,5 +1,6 @@
 const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
+const { v1: uuid } = require("uuid");
 
 let authors = [
   {
@@ -26,14 +27,6 @@ let authors = [
     id: "afa5b6f3-344d-11e9-a414-719c6709cf3e",
   },
 ];
-
-/*
-
- * English:
- * It might make more sense to associate a book with its author by storing the author's id in the context of the book instead of the author's name
- * However, for simplicity, we will store the author's name in connection with the book
- 
- */
 
 let books = [
   {
@@ -87,21 +80,17 @@ let books = [
   },
 ];
 
-/*
-  you can remove the placeholder query once your first one has been implemented 
-*/
-
 const typeDefs = `
   type Book {
     title: String!
-    published: String!
+    published: Int
     author: String!
     genres: [String]!
   }  
 
   type Author {
     name: String!
-    born: String
+    born: Int
     id: ID!
     bookCount: Int
   }
@@ -113,6 +102,14 @@ const typeDefs = `
     allAuthors: [Author!]
   }
 
+  type Mutation {
+    addBook(
+        title: String!
+        published: Int!
+        author: String!
+        genres: [String]!
+    ): Book
+  }
 `;
 
 const resolvers = {
@@ -135,6 +132,19 @@ const resolvers = {
   },
   Author: {
     bookCount: (root) => books.filter((b) => b.author === root.name).length,
+  },
+  Mutation: {
+    addBook: (root, args) => {
+      const book = { ...args, id: uuid() };
+      books = books.concat(book);
+      if (authors.find((a) => a.name === book.author)) {
+        return book;
+      } else if (!authors.find((a) => a.name === book.author)) {
+        const author = { name: book.author, id: uuid(), bookCount: 1 };
+        authors = authors.concat(author);
+        return book;
+      }
+    },
   },
 };
 
