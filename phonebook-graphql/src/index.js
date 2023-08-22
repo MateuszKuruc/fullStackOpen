@@ -27,6 +27,8 @@ const query = gql`
   }
 `;
 
+
+
 client.query({ query }).then((response) => {
   console.log(response.data);
 });
