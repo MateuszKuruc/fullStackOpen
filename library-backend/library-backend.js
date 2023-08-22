@@ -120,8 +120,8 @@ const resolvers = {
     bookCount: () => books.length,
     authorCount: () => authors.length,
     allBooks: (root, args) => {
-      if (args.name) {
-        return books.filter((b) => b.author === args.name);
+      if (args.author) {
+        return books.filter((b) => b.author === args.author);
       } else {
         return books;
       }
