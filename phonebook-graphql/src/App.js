@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import Persons from "./components/Persons";
+import PersonForm from "./components/PersonForm";
 
 const ALL_PERSONS = gql`
   query {
