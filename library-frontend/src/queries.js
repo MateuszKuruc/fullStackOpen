@@ -10,3 +10,14 @@ export const ALL_AUTHORS = gql`
     }
   }
 `;
+
+export const ADD_BOOK = gql`
+mutation addBook($title: String!, $published: Int, $author: String!, $genres: [String]!) {
+    addBook(
+        title
+        published
+        author
+        genres
+    )
+}
+`;
