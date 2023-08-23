@@ -19,10 +19,6 @@ const NewBook = (props) => {
     event.preventDefault();
 
     console.log("add book...");
-    // const publishedToNumber = Number(published);
-    // const publishedInt = parseInt(published);
-    // console.log(typeof publishedInt);
-    // console.log(typeof published);
 
     addBook({ variables: { title, author, published, genres } });
 
