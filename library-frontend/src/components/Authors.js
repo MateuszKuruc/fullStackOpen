@@ -14,7 +14,7 @@ const Authors = ({ show, authors }) => {
 
   const submit = async (event) => {
     event.preventDefault();
-    const setBornTo = born;
+    const setBornTo = parseInt(born);
 
     editAuthor({ variables: { name, setBornTo } });
     setName("");
@@ -55,7 +55,7 @@ const Authors = ({ show, authors }) => {
             born
             <input
               value={born}
-              onChange={({ target }) => setBorn(parseInt(target.value))}
+              onChange={({ target }) => setBorn(target.value)}
               placeholder="enter year"
             ></input>
           </div>
