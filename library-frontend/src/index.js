@@ -15,19 +15,19 @@ const client = new ApolloClient({
 });
 
 const query = gql`
-query {
+  query {
     allAuthors {
-        name
-        born
-        id
-        bookCount
+      name
+      born
+      id
+      bookCount
     }
-}
-`
+  }
+`;
 
-client.query({ query }).then(response => {
-    console.log(response.data);
-})
+client.query({ query }).then((response) => {
+  console.log(response.data);
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ApolloProvider client={client}>
