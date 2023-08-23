@@ -137,21 +137,29 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    bookCount: () => books.length,
-    authorCount: () => authors.length,
+    // bookCount: () => books.length,
+    // authorCount: () => authors.length,
+    // allBooks: (root, args) => {
+    //   if (args.author && !args.genre) {
+    //     return books.filter((b) => b.author === args.author);
+    //   } else if (!args.author && !args.genre) {
+    //     return books;
+    //   } else if (args.genre && !args.author) {
+    //     return books.filter((b) => b.genres.includes(args.genre));
+    //   } else if (args.author && args.genre) {
+    //     const authorBooks = books.filter((b) => b.author === args.author);
+    //     return authorBooks.filter((b) => b.genres.includes(args.genre));
+    //   }
+    // },
+    // allAuthors: () => authors,
+    bookCount: async () => Book.collection.countDocuments(),
+    authorCount: async () => Author.collection.countDocuments(),
     allBooks: (root, args) => {
-      if (args.author && !args.genre) {
-        return books.filter((b) => b.author === args.author);
-      } else if (!args.author && !args.genre) {
-        return books;
-      } else if (args.genre && !args.author) {
-        return books.filter((b) => b.genres.includes(args.genre));
-      } else if (args.author && args.genre) {
-        const authorBooks = books.filter((b) => b.author === args.author);
-        return authorBooks.filter((b) => b.genres.includes(args.genre));
-      }
+      return Book.find({});
     },
-    allAuthors: () => authors,
+    allAuthors: (root, args) => {
+      return Author.find({});
+    },
   },
   Author: {
     bookCount: (root) => books.filter((b) => b.author === root.name).length,
