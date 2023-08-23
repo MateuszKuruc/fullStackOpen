@@ -1,4 +1,9 @@
+import { useMutation } from "@apollo/client";
+import { EDIT_AUTHOR } from "../queries";
+
 const Authors = ({ show, authors }) => {
+  const [editAuthor] = useMutation(EDIT_AUTHOR);
+
   if (!show) {
     return null;
   }
