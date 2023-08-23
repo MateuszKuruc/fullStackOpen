@@ -20,8 +20,11 @@ const App = () => {
   }
 
   return (
-    <Persons persons={result.data.allPersons} />
-  )
-}
+    <div>
+      <Persons persons={result.data.allPersons} />
+      <PersonForm />
+    </div>
+  );
+};
 
 export default App;
