@@ -43,6 +43,11 @@ const Authors = ({ show, authors }) => {
       <div>
         <h2>Set birthyear</h2>
         <form onSubmit={submit}>
+          <select>
+            {authors.map((a) => (
+              <option key={a.id}>{a.name}</option>
+            ))}
+          </select>
           <div>
             name
             <input
