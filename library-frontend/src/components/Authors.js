@@ -3,8 +3,8 @@ import { EDIT_AUTHOR } from "../queries";
 import { useState } from "react";
 
 const Authors = ({ show, authors }) => {
-  const [name, setName] = useState(null);
-  const [born, setBorn] = useState(null);
+  const [name, setName] = useState("");
+  const [born, setBorn] = useState("");
 
   const [editAuthor] = useMutation(EDIT_AUTHOR);
 
@@ -14,6 +14,11 @@ const Authors = ({ show, authors }) => {
 
   const submit = async (event) => {
     event.preventDefault();
+    const setBornTo = born;
+
+    editAuthor({ variables: { name, setBornTo } });
+    setName("");
+    setBorn("");
   };
 
   return (
@@ -40,11 +45,19 @@ const Authors = ({ show, authors }) => {
         <form onSubmit={submit}>
           <div>
             name
-            <input placeholder="enter name"></input>
+            <input
+              value={name}
+              onChange={({ target }) => setName(target.value)}
+              placeholder="enter name"
+            ></input>
           </div>
           <div>
             born
-            <input placeholder="enter year"></input>
+            <input
+              value={born}
+              onChange={({ target }) => setBorn(parseInt(target.value))}
+              placeholder="enter year"
+            ></input>
           </div>
           <button type="submit">update author</button>
         </form>
