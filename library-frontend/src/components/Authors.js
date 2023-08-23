@@ -3,7 +3,7 @@ import { EDIT_AUTHOR } from "../queries";
 import { useState } from "react";
 
 const Authors = ({ show, authors }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(authors[0].name);
   const [born, setBorn] = useState("");
 
   const [editAuthor] = useMutation(EDIT_AUTHOR);
@@ -43,19 +43,21 @@ const Authors = ({ show, authors }) => {
       <div>
         <h2>Set birthyear</h2>
         <form onSubmit={submit}>
-          <select>
+          <select onChange={(event) => setName(event.target.value)}>
             {authors.map((a) => (
-              <option key={a.id}>{a.name}</option>
+              <option key={a.id} value={a.name}>
+                {a.name}
+              </option>
             ))}
           </select>
-          <div>
+          {/* <div>
             name
             <input
               value={name}
               onChange={({ target }) => setName(target.value)}
               placeholder="enter name"
             ></input>
-          </div>
+          </div> */}
           <div>
             born
             <input
