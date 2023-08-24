@@ -191,12 +191,19 @@ const resolvers = {
 
     editAuthor: async (root, args) => {
       const author = await Author.findOne({ name: args.name });
-      if (!author) {
-        return null;
-      }
 
-      author.born = args.setBornTo;
-      return author.save();
+      try {
+        author.born = args.setBornTo;
+        return author.save();
+      } catch (error) {
+        throw new GraphQLError("Editing author failed", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+            invalidArgs: args.name,
+            error,
+          },
+        });
+      }
     },
   },
 };
