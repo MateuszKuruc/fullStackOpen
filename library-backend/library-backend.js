@@ -132,6 +132,10 @@ const typeDefs = `
         name: String!,
         setBornTo: Int!
     ): Author
+    addAuthor(
+        name: String!
+        born: Int!
+    ) : Author
   }
 `;
 
@@ -179,6 +183,10 @@ const resolvers = {
     addBook: (root, args) => {
       const book = new Book({ ...args });
       return book.save();
+    },
+    addAuthor: (root, args) => {
+      const author = new Author({ ...args });
+      return author.save();
     },
     // editAuthor: (root, args) => {
     //   const author = authors.find((a) => a.name === args.name);
