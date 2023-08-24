@@ -115,6 +115,21 @@ const typeDefs = `
     bookCount: Int
   }
 
+  type User {
+    username: String!
+    favoriteGenre: String!
+    id: ID!
+  }
+  
+  type Token {
+    value: String!
+  }
+  
+  type Query {
+    // ..
+    me: User
+  }
+
   type Query {
     bookCount: Int
     authorCount: Int
@@ -137,6 +152,14 @@ const typeDefs = `
         name: String!
         born: Int!
     ) : Author
+    createUser(
+        username: String!
+        favoriteGenre: String!
+      ): User
+      login(
+        username: String!
+        password: String!
+      ): Token
   }
 `;
 
