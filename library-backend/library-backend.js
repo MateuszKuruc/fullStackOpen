@@ -6,8 +6,11 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const Book = require("./models/book");
 const Author = require("./models/author");
+const User = require("./models/user");
 const { GraphQLError } = require("graphql");
 require("dotenv").config();
+
+const jwt = require("jsonwebtoken");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -48,15 +51,11 @@ const typeDefs = `
   }
   
   type Query {
-    // ..
-    me: User
-  }
-
-  type Query {
     bookCount: Int
     authorCount: Int
     allBooks(author: String, genre: String): [Book!]!
     allAuthors: [Author!]
+    me: User
   }
 
   type Mutation {
@@ -149,6 +148,40 @@ const resolvers = {
           },
         });
       }
+    },
+    createUser: async (root, args) => {
+      const user = new User({
+        username: args.username,
+        favoriteGenre: args.favoriteGenre,
+      });
+
+      return user.save().catch((error) => {
+        throw new GraphQLError("Creating the user failed", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+            invalidArgs: args.name,
+            error,
+          },
+        });
+      });
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username });
+
+      if (!user || args.password !== "secret") {
+        throw new GraphQLError("Wrong credentials", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+          },
+        });
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      };
+
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) };
     },
   },
 };
