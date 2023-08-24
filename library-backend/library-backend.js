@@ -158,11 +158,18 @@ const resolvers = {
     // allAuthors: () => authors,
     bookCount: async () => Book.collection.countDocuments(),
     authorCount: async () => Author.collection.countDocuments(),
-    allBooks: (root, args) => {
-      return Book.find({});
+    allBooks: async (root, args) => {
+      return await Book.find({});
     },
-    allAuthors: (root, args) => {
-      return Author.find({});
+    allAuthors: async (root, args) => {
+      try {
+        // const authors = await Author.find({});
+        // return authors;
+        return await Author.find({});
+      } catch (error) {
+        throw new Error("Failed to fetch authors");
+      }
+      //   return Author.find({});
     },
   },
   Author: {
