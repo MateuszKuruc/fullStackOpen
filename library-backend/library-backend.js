@@ -90,7 +90,7 @@ const resolvers = {
     bookCount: async () => Book.collection.countDocuments(),
     authorCount: async () => Author.collection.countDocuments(),
     allBooks: async (root, args) => {
-      return await Book.find({});
+      return Book.find({}).populate("author");
     },
     allAuthors: async (root, args) => {
       try {
@@ -163,7 +163,7 @@ const resolvers = {
         throw new GraphQLError("not authenticated", {
           extensions: {
             code: "BAD_USER_INPUT",
-            invalidArgs: args.title,
+            invalidArgs: args.name,
             error,
           },
         });
