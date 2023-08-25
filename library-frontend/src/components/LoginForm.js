@@ -23,6 +23,8 @@ const LoginForm = ({ show, setToken }) => {
   const submit = (event) => {
     event.preventDefault();
     login({ variables: { username, password } });
+    setUsername("");
+    setPassword("");
   };
 
   return (
@@ -38,6 +40,7 @@ const LoginForm = ({ show, setToken }) => {
         <div>
           password
           <input
+            type="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />

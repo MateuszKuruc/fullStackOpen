@@ -18,44 +18,27 @@ const App = () => {
 
   if (!token) {
     return (
-      <div>
-        <div>
-          <button onClick={() => setPage("authors")}>authors</button>
-          <button onClick={() => setPage("books")}>books</button>
-
-          <button onClick={() => setPage("login")}>login</button>
-        </div>
-
+      <>
+        <button onClick={() => setPage("authors")}>authors</button>
+        <button onClick={() => setPage("books")}>books</button>
+        <button onClick={() => setPage("login")}>login</button>
         <Authors show={page === "authors"} />
-
         <Books show={page === "books"} />
-
-        <NewBook show={page === "add"} />
-
         <LoginForm setToken={setToken} show={page === "login"} />
-      </div>
+      </>
     );
   }
 
   return (
-    <div>
-      <div>
-        <button onClick={() => setPage("authors")}>authors</button>
-        <button onClick={() => setPage("books")}>books</button>
-        <button onClick={() => setPage("add")}>add book</button>
-        <button onClick={() => setPage("login")}>login</button>
-      </div>
-
+    <>
+      <button onClick={() => setPage("authors")}>authors</button>
+      <button onClick={() => setPage("books")}>books</button>
+      <button onClick={() => setPage("add")}>add book</button>
       <Authors show={page === "authors"} />
-
       <Books show={page === "books"} />
-
       <NewBook show={page === "add"} />
-
       <button onClick={logout}>logout</button>
-
-      {/* <LoginForm show={page === "login"} /> */}
-    </div>
+    </>
   );
 };
 
