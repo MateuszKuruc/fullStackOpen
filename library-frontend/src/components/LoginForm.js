@@ -11,7 +11,7 @@ const LoginForm = ({ show }) => {
     <div>
       <form onSubmit={login}>
         <div>
-          name
+          username
           <input />
         </div>
         <div>

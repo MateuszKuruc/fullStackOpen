@@ -24,7 +24,7 @@ const App = () => {
 
         <NewBook show={page === "add"} />
 
-        <LoginForm show={page === "login"} />
+        <LoginForm setToken={setToken} show={page === "login"} />
       </div>
     );
   }
