@@ -27,7 +27,7 @@ const Authors = ({ show, authors }) => {
       <table>
         <tbody>
           <tr>
-            <th></th>
+            <th>name</th>
             <th>born</th>
             <th>books</th>
           </tr>
@@ -50,14 +50,7 @@ const Authors = ({ show, authors }) => {
               </option>
             ))}
           </select>
-          {/* <div>
-            name
-            <input
-              value={name}
-              onChange={({ target }) => setName(target.value)}
-              placeholder="enter name"
-            ></input>
-          </div> */}
+
           <div>
             born
             <input
