@@ -104,8 +104,6 @@ const resolvers = {
     },
   },
   Author: {
-    //     bookCount: (root) => books.filter((b) => b.author === root.name).length,
-    //   },
     bookCount: async (root, args) => {
       const bookCount = await Book.countDocuments({ author: root._id });
       return bookCount;
