@@ -3,10 +3,18 @@ import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
 import LoginForm from "./components/LoginForm";
+import { useApolloClient } from "@apollo/client";
 
 const App = () => {
   const [page, setPage] = useState("authors");
   const [token, setToken] = useState(null);
+  const client = useApolloClient();
+
+  const logout = () => {
+    localStorage.clear();
+    setToken(null);
+    client.resetStore();
+  };
 
   if (!token) {
     return (
@@ -44,7 +52,9 @@ const App = () => {
 
       <NewBook show={page === "add"} />
 
-      <LoginForm show={page === "login"} />
+      <button onClick={logout}>logout</button>
+
+      {/* <LoginForm show={page === "login"} /> */}
     </div>
   );
 };
