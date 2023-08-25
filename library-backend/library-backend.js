@@ -37,7 +37,8 @@ const typeDefs = `
     name: String!
     born: Int
     id: ID!
-    bookCount: Int
+    bookCount: Int!
+    books: [Book!]!
   }
 
   type User {
@@ -103,7 +104,12 @@ const resolvers = {
     },
   },
   Author: {
-    bookCount: (root) => books.filter((b) => b.author === root.name).length,
+    //     bookCount: (root) => books.filter((b) => b.author === root.name).length,
+    //   },
+    bookCount: async (root, args) => {
+      const bookCount = await Book.countDocuments({ author: root._id });
+      return bookCount;
+    },
   },
   Mutation: {
     addBook: async (root, args, context) => {
@@ -121,6 +127,8 @@ const resolvers = {
 
       try {
         await book.save();
+        author.bookCount = await Book.countDocuments({ author: author._id });
+        await author.save();
       } catch (error) {
         throw new GraphQLError("Saving book failed", {
           extensions: {
