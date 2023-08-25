@@ -1,16 +1,23 @@
 import { useMutation } from "@apollo/client";
-import { EDIT_AUTHOR } from "../queries";
+import { EDIT_AUTHOR, ALL_AUTHORS } from "../queries";
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
 
-const Authors = ({ show, authors }) => {
-  const [name, setName] = useState(authors[0].name);
-  const [born, setBorn] = useState("");
-
+const Authors = ({ show }) => {
+  const { loading, data } = useQuery(ALL_AUTHORS);
   const [editAuthor] = useMutation(EDIT_AUTHOR);
+
+  const [name, setName] = useState("");
+  const [born, setBorn] = useState("");
 
   if (!show) {
     return null;
   }
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+  const authors = data.allAuthors;
 
   const submit = async (event) => {
     event.preventDefault();
