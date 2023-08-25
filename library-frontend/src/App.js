@@ -22,7 +22,7 @@ const App = () => {
 
       <NewBook show={page === "add"} />
 
-      <LoginForm />
+      <LoginForm show={page === "login"} />
     </div>
   );
 };
