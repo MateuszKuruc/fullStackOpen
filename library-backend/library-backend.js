@@ -107,7 +107,8 @@ const resolvers = {
   },
   Mutation: {
     addBook: async (root, args, context) => {
-      const book = new Book({ ...args });
+      const author = await Author.findOne({ name: args.author });
+      const book = new Book({ ...args, author: author._id });
       const currentUser = context.currentUser;
 
       if (!currentUser) {
@@ -129,6 +130,8 @@ const resolvers = {
           },
         });
       }
+      book.author = author;
+
       return book;
     },
     addAuthor: async (root, args) => {
