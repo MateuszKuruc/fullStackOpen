@@ -26,7 +26,6 @@ const Authors = ({ show }) => {
   const submit = async (event) => {
     event.preventDefault();
     const setBornTo = parseInt(born);
-    console.log(name, setBornTo);
 
     editAuthor({ variables: { name, setBornTo } });
     setName("");

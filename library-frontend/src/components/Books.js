@@ -15,15 +15,12 @@ const Books = ({ show }) => {
   }
 
   const books = data.allBooks;
-  console.log("books:", books);
-  console.log("filtered books:", filteredBooks);
 
   const filterBooksByGenre = (genre) => {
     if (!genre) {
       return setFilteredBooks(books);
     } else {
       const filtered = books.filter((book) => book.genres.includes(genre));
-      console.log("filtered", filtered);
       setFilteredBooks(filtered);
     }
   };
@@ -49,6 +46,10 @@ const Books = ({ show }) => {
           ))}
         </tbody>
       </table>
+      <div>
+        <h2>Recommendations</h2>
+        Books in your favourite genre:
+      </div>
       <div>
         <h2>Filters</h2>
         <button onClick={() => filterBooksByGenre()}>All books</button>
