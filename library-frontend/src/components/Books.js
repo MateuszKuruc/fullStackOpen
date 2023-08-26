@@ -25,13 +25,6 @@ const Books = ({ show, userToken }) => {
     }
   }, [userToken]);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     refetchUser();
-  //   }, 5000);
-  //   return () => clearInterval(interval)
-  // }, [refetchUser]);
-
   useEffect(() => {
     let interval = null;
 
@@ -58,6 +51,7 @@ const Books = ({ show, userToken }) => {
 
   const books = booksData.allBooks;
   console.log("user", user);
+  console.log("books", books);
 
   const filterBooksByGenre = (genre) => {
     if (!genre) {
@@ -91,7 +85,15 @@ const Books = ({ show, userToken }) => {
       {userToken && user && user.favoriteGenre ? (
         <div>
           <h2>Recommendations</h2>
-          Books in your favourite genre: {user.favoriteGenre}
+          Books in your favourite genre, "{user.favoriteGenre}":
+          <ul>
+            {books.map((book) => {
+              if (book.genres.includes(user.favoriteGenre)) {
+                return <li key={book._id}>{book.title}</li>;
+              }
+              return null;
+            })}
+          </ul>
         </div>
       ) : null}
 
