@@ -50,8 +50,6 @@ const Books = ({ show, userToken }) => {
   }
 
   const books = booksData.allBooks;
-  console.log("user", user);
-  console.log("books", books);
 
   const filterBooksByGenre = (genre) => {
     if (!genre) {

@@ -12,8 +12,6 @@ const App = () => {
   );
   const client = useApolloClient();
 
-  console.log("page:", page, "token:", token);
-
   const logout = () => {
     localStorage.clear();
     setToken(null);
