@@ -19,9 +19,14 @@ const Authors = ({ show }) => {
   }
   const authors = data.allAuthors;
 
+  if (!name && authors.length > 0) {
+    setName(authors[0].name);
+  }
+
   const submit = async (event) => {
     event.preventDefault();
     const setBornTo = parseInt(born);
+    console.log(name, setBornTo);
 
     editAuthor({ variables: { name, setBornTo } });
     setName("");

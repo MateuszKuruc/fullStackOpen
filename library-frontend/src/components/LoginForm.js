@@ -20,7 +20,7 @@ const LoginForm = ({ show, setToken }) => {
     return null;
   }
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
     login({ variables: { username, password } });
     setUsername("");

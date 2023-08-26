@@ -10,6 +10,8 @@ const App = () => {
   const [token, setToken] = useState(null);
   const client = useApolloClient();
 
+  console.log("page:", page, "token:", token);
+
   const logout = () => {
     localStorage.clear();
     setToken(null);
@@ -29,17 +31,19 @@ const App = () => {
     );
   }
 
-  return (
-    <>
-      <button onClick={() => setPage("authors")}>authors</button>
-      <button onClick={() => setPage("books")}>books</button>
-      <button onClick={() => setPage("add")}>add book</button>
-      <Authors show={page === "authors"} />
-      <Books show={page === "books"} />
-      <NewBook show={page === "add"} />
-      <button onClick={logout}>logout</button>
-    </>
-  );
+  if (token) {
+    return (
+      <>
+        <button onClick={() => setPage("authors")}>authors</button>
+        <button onClick={() => setPage("books")}>books</button>
+        <button onClick={() => setPage("add")}>add book</button>
+        <button onClick={logout}>logout</button>
+        <Authors show={page === "authors"} />
+        <Books show={page === "books"} />
+        <NewBook show={page === "add"} />
+      </>
+    );
+  }
 };
 
 export default App;
