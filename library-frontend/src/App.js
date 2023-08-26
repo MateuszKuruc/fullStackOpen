@@ -41,7 +41,7 @@ const App = () => {
         <button onClick={() => setPage("add")}>add book</button>
         <button onClick={logout}>logout</button>
         <Authors show={page === "authors"} />
-        <Books show={page === "books"} />
+        <Books userToken={token} show={page === "books"} />
         <NewBook show={page === "add"} />
       </>
     );

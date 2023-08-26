@@ -1,11 +1,52 @@
 import { useQuery } from "@apollo/client";
 import { ALL_BOOKS, ME } from "../queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Books = ({ show }) => {
+const Books = ({ show, userToken }) => {
   const { loading: booksLoading, data: booksData } = useQuery(ALL_BOOKS);
-  const { loading: userLoading, data: userData } = useQuery(ME);
+  const {
+    loading: userLoading,
+    data: userData,
+    refetch: refetchUser,
+  } = useQuery(ME);
   const [filteredBooks, setFilteredBooks] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (userToken && userData) {
+      setUser(userData.me);
+      console.log("token & data", userToken, userData.me);
+    }
+  }, [userData, userToken]);
+
+  useEffect(() => {
+    if (!userToken) {
+      setUser(null);
+    }
+  }, [userToken]);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetchUser();
+  //   }, 5000);
+  //   return () => clearInterval(interval)
+  // }, [refetchUser]);
+
+  useEffect(() => {
+    let interval = null;
+
+    if (!user) {
+      interval = setInterval(() => {
+        refetchUser();
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [userData, refetchUser, user]);
 
   if (!show) {
     return null;
@@ -16,6 +57,7 @@ const Books = ({ show }) => {
   }
 
   const books = booksData.allBooks;
+  console.log("user", user);
 
   const filterBooksByGenre = (genre) => {
     if (!genre) {
@@ -46,10 +88,10 @@ const Books = ({ show }) => {
           ))}
         </tbody>
       </table>
-      {userData?.me ? (
+      {userToken && user && user.favoriteGenre ? (
         <div>
           <h2>Recommendations</h2>
-          Books in your favourite genre: {userData.me.favoriteGenre}
+          Books in your favourite genre: {user.favoriteGenre}
         </div>
       ) : null}
 
