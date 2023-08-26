@@ -39,6 +39,10 @@ const typeDefs = `
     findPerson(name: String!): Person
   }
 
+  type Subscription {
+    personAdded: Person!
+  }
+
   type Mutation {
     addPerson(
       name: String!
