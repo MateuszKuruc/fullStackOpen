@@ -7,7 +7,9 @@ import { useApolloClient } from "@apollo/client";
 
 const App = () => {
   const [page, setPage] = useState("authors");
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem("library-user-token")
+  );
   const client = useApolloClient();
 
   console.log("page:", page, "token:", token);

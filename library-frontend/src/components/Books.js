@@ -1,20 +1,21 @@
 import { useQuery } from "@apollo/client";
-import { ALL_BOOKS } from "../queries";
+import { ALL_BOOKS, ME } from "../queries";
 import { useState } from "react";
 
 const Books = ({ show }) => {
-  const { loading, data } = useQuery(ALL_BOOKS);
+  const { loading: booksLoading, data: booksData } = useQuery(ALL_BOOKS);
+  const { loading: userLoading, data: userData } = useQuery(ME);
   const [filteredBooks, setFilteredBooks] = useState(null);
 
   if (!show) {
     return null;
   }
 
-  if (loading) {
+  if (booksLoading || userLoading) {
     return <div>loading</div>;
   }
 
-  const books = data.allBooks;
+  const books = booksData.allBooks;
 
   const filterBooksByGenre = (genre) => {
     if (!genre) {
@@ -28,7 +29,6 @@ const Books = ({ show }) => {
   return (
     <div>
       <h2>books</h2>
-
       <table>
         <tbody>
           <tr>
@@ -46,10 +46,13 @@ const Books = ({ show }) => {
           ))}
         </tbody>
       </table>
-      <div>
-        <h2>Recommendations</h2>
-        Books in your favourite genre:
-      </div>
+      {userData?.me ? (
+        <div>
+          <h2>Recommendations</h2>
+          Books in your favourite genre: {userData.me.favoriteGenre}
+        </div>
+      ) : null}
+
       <div>
         <h2>Filters</h2>
         <button onClick={() => filterBooksByGenre()}>All books</button>
