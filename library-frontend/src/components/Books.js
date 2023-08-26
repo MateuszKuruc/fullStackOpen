@@ -89,7 +89,7 @@ const Books = ({ show, userToken }) => {
           <ul>
             {books.map((book) => {
               if (book.genres.includes(user.favoriteGenre)) {
-                return <li key={book._id}>{book.title}</li>;
+                return <li key={book.title}>{book.title}</li>;
               }
               return null;
             })}
