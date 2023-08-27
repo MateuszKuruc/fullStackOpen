@@ -16,6 +16,7 @@ const resolvers = {
     },
     allAuthors: async (root, args) => {
       try {
+        console.log('Author.find');
         return await Author.find({});
       } catch (error) {
         throw new Error("Failed to fetch authors");
