@@ -10,6 +10,9 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 
+const typeDefs = require("./schema");
+const resolvers = require("./resolvers");
+
 const MONGODB_URI = process.env.MONGODB_URI;
 
 console.log("connecting to", MONGODB_URI);
