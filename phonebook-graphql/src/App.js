@@ -42,22 +42,6 @@ const App = () => {
       const addedPerson = data.data.personAdded;
       notify(`${addedPerson.name} added`);
       updateCache(client.cache, { query: ALL_PERSONS }, addedPerson);
-
-      /*
-      const uniqByName = (a) => {
-        let seen = new Set()
-        return a.filter((item) => {
-          let k = item.name
-          return seen.has(k) ? false : seen.add(k)
-        })
-      }
-
-      client.cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
-        return {
-          allPersons: uniqByName(allPersons.concat(addedPerson)),
-        }
-      })
-      */
     },
   });
 
