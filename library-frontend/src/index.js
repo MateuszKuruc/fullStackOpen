@@ -45,7 +45,7 @@ const splitLink = split(
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink),
+  link: splitLink,
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
