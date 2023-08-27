@@ -3,6 +3,9 @@ const Author = require("./models/author");
 const { GraphQLError } = require("graphql");
 const User = require("./models/user");
 
+const { PubSub } = require("graphql-subscriptions");
+const pubsub = new PubSub();
+
 const resolvers = {
   Query: {
     bookCount: async () => Book.collection.countDocuments(),
@@ -55,6 +58,8 @@ const resolvers = {
         });
       }
       book.author = author;
+
+      pubsub.publish("BOOK_ADDED", { bookAdded: book });
 
       return book;
     },
@@ -133,6 +138,11 @@ const resolvers = {
       };
 
       return { value: jwt.sign(userForToken, process.env.JWT_SECRET) };
+    },
+  },
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator("BOOK_ADDED"),
     },
   },
 };
