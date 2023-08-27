@@ -9,7 +9,7 @@ import {
   useMutation,
   useSubscription,
 } from "@apollo/client";
-import { BOOK_ADDED } from "./queries";
+import { ALL_BOOKS, BOOK_ADDED } from "./queries";
 
 const App = () => {
   const [page, setPage] = useState("authors");
@@ -20,8 +20,14 @@ const App = () => {
 
   useSubscription(BOOK_ADDED, {
     onData: ({ data }) => {
-      console.log(data);
+      const addedBook = data.data.bookAdded;
       window.alert(`New book added`);
+
+      client.cache.updateQuery({ query: ALL_BOOKS }, ({ allBooks }) => {
+        return {
+          allBooks: allBooks.concat(addedBook),
+        };
+      });
     },
   });
 
