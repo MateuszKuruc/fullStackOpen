@@ -15,7 +15,6 @@ const Books = ({ show, userToken }) => {
   useEffect(() => {
     if (userToken && userData) {
       setUser(userData.me);
-      console.log("token & data", userToken, userData.me);
     }
   }, [userData, userToken]);
 

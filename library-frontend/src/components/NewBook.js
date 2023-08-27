@@ -22,17 +22,6 @@ const NewBook = (props) => {
 
     const published = parseInt(publishedInfo);
 
-    console.log(
-      "title:",
-      title,
-      "author:",
-      author,
-      "published:",
-      published,
-      "genres:",
-      genres
-    );
-
     addBook({ variables: { title, author, published, genres } });
 
     setTitle("");
