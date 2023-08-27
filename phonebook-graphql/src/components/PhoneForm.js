@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 
 import { EDIT_NUMBER } from "../queries";
@@ -9,7 +9,7 @@ const PhoneForm = ({ setError }) => {
 
   const [changeNumber, result] = useMutation(EDIT_NUMBER);
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
 
     changeNumber({ variables: { name, phone } });
@@ -22,7 +22,7 @@ const PhoneForm = ({ setError }) => {
     if (result.data && result.data.editNumber === null) {
       setError("person not found");
     }
-  }, [result.data]);
+  }, [result.data]); // eslint-disable-line
 
   return (
     <div>
