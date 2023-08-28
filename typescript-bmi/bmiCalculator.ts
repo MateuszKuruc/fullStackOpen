@@ -8,7 +8,11 @@ const calculateBmi = (height: number, weight: number): Assessment => {
     return "Normal weight";
   } else if (bmi < 30) {
     return "Overweight";
-  } else if (bmi > 30) return "Obese";
+  } else if (bmi > 30) {
+    return "Obese";
+  }
+
+  throw new Error("Unhandled BMI condition");
 };
 
 const height: number = Number(process.argv[2]);
