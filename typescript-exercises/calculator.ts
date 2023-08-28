@@ -14,7 +14,7 @@ const calculator = (a: number, b: number, op: Operation): number => {
 };
 
 try {
-  console.log(calculator(1, 5, "e"));
+  console.log(calculator(1, 5, "multiply"));
 } catch (error: unknown) {
   let errorMessage = "Something went wrong:";
   if (error instanceof Error) {
