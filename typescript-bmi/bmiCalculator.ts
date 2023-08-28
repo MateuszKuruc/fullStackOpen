@@ -14,6 +14,8 @@ const calculateBmi = (height: number, weight: number): Assessment => {
 const height: number = Number(process.argv[2]);
 const weight: number = Number(process.argv[3]);
 
-console.log(calculateBmi(height, weight));
-
-// console.log(calculateBmi(190, 90));
+if (!isNaN(height) || !isNaN(weight)) {
+  console.log(calculateBmi(height, weight));
+} else {
+  console.log("Invalid input. Please use numbers for height and weight.");
+}
