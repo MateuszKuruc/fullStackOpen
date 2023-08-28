@@ -1,4 +1,4 @@
-type Assessment = "Underweight" | "Normal weight" | "Overweight" | "Obese";
+export type Assessment = "Underweight" | "Normal weight" | "Overweight" | "Obese";
 
 const calculateBmi = (height: number, weight: number): Assessment => {
   const bmi = weight / ((height / 100) * (height / 100));
@@ -23,3 +23,5 @@ if (!isNaN(height) || !isNaN(weight)) {
 } else {
   console.log("Invalid input. Please use numbers for height and weight.");
 }
+
+export { calculateBmi };
