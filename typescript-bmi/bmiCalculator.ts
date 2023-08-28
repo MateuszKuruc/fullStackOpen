@@ -1,4 +1,8 @@
-export type Assessment = "Underweight" | "Normal weight" | "Overweight" | "Obese";
+export type Assessment =
+  | "Underweight"
+  | "Normal weight"
+  | "Overweight"
+  | "Obese";
 
 const calculateBmi = (height: number, weight: number): Assessment => {
   const bmi = weight / ((height / 100) * (height / 100));
