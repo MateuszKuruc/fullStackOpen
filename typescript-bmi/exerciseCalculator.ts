@@ -47,4 +47,10 @@ const calculateExercises = (data: number[], dailyTarget: number): Result => {
 const inputHours: number[] = process.argv.slice(2).map((n) => Number(n));
 const targetInfo: number = Number(process.argv[process.argv.length - 1]);
 
-console.log(calculateExercises(inputHours, targetInfo));
+if (inputHours.length < 1 || isNaN(targetInfo)) {
+  console.log(
+    "Invalid input. Please provide valid numbers for hours and target"
+  );
+} else {
+  console.log(calculateExercises(inputHours, targetInfo));
+}
