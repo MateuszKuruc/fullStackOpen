@@ -12,28 +12,26 @@ const calculateExercises = (data: number[], dailyTarget: number): Result => {
   const periodLength = data.length;
   const trainingDays = data.filter((d) => d !== 0).length;
   const target = dailyTarget;
-  const allHours = data.reduce((sum, number) => {
-    return sum + number;
-  }, 0);
-  const average = allHours / periodLength;
+  const average =
+    data.reduce((sum, number) => {
+      return sum + number;
+    }, 0) / periodLength;
   const success = average > target ? true : false;
-  let rating;
-  if (periodLength === trainingDays) {
-    rating = 3;
-  } else if ((trainingDays / periodLength) * 100 > 80) {
-    rating = 2;
-  } else {
-    rating = 1;
-  }
 
-  let ratingDescription;
-  if (rating === 3) {
-    ratingDescription = "very well done!";
-  } else if (rating === 2) {
-    ratingDescription = "not too bad!";
-  } else {
-    ratingDescription = "need to try harder!";
-  }
+  const rating =
+    periodLength === trainingDays
+      ? 3
+      : (trainingDays / periodLength) * 100 > 80
+      ? 2
+      : 1;
+
+  const ratingDescriptions = {
+    3: "very well done!",
+    2: "not too bad!",
+    1: "need to try harder!",
+  };
+
+  const ratingDescription = ratingDescriptions[rating];
 
   return {
     periodLength,
@@ -46,12 +44,4 @@ const calculateExercises = (data: number[], dailyTarget: number): Result => {
   };
 };
 
-// const data = [1, 2, 3, 4, 5];
-// const allHours = data.reduce((sum, number) => {
-//   return sum + number;
-// }, 0);
-
-// console.log(allHours);
-
-// const trainingDays = data.filter((d) => d !== 0).length;
-// console.log(trainingDays);
+console.log(calculateExercises([1, 2, 0, 4, 5, 3, 0, 0], 2));
