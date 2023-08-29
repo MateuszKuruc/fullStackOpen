@@ -1,10 +1,12 @@
 import patientsData from "../../data/patients";
-import { PatientEntry } from "../../types";
+// import { PatientEntry } from "../../types";
+import { NonSensitivePatientEntry } from "../../types";
 
-const patients: PatientEntry[] = patientsData;
+// const patients: PatientEntry[] = patientsData;
+// const patients = patientsData;
 
-const getEntries = () => {
-  return patients;
+const getEntries = (): NonSensitivePatientEntry[] => {
+  return patientsData;
 };
 
 export default {
