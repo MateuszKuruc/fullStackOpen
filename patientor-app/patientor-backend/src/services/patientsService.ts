@@ -21,7 +21,7 @@ const addPatient = (entry: NewPatientEntry): PatientEntry => {
     id: uuid(),
     ...entry,
   };
-
+  console.log(newPatientEntry);
   patientsData.push(newPatientEntry);
   return newPatientEntry;
 };
