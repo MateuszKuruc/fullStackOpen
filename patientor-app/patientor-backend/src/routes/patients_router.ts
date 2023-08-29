@@ -1,10 +1,10 @@
 import express from "express";
-// import { PatientEntry } from "../../types";
+import patientsService from "../services/patientsService";
 
 const router = express.Router();
 
 router.get("/", (_req, res) => {
-  res.send("Fetching patients data!");
+  res.send(patientsService.getEntries());
 });
 
 export default router;
