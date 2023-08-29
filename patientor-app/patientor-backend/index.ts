@@ -3,7 +3,8 @@ import diagnosisRouter from "./src/routes/diagnoses_router";
 import patientsRouter from "./src/routes/patients_router";
 
 const app = express();
-const cors = require("cors");
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+import cors from "cors";
 
 app.use(express.json());
 app.use(cors());
