@@ -1,4 +1,4 @@
-interface Result {
+export interface Result {
   periodLength: number;
   trainingDays: number;
   success: boolean;
@@ -8,7 +8,7 @@ interface Result {
   average: number;
 }
 
-const calculateExercises = (data: number[], dailyTarget: number): Result => {
+export const calculateExercises = (data: number[], dailyTarget: number): Result => {
   const periodLength = data.length;
   const trainingDays = data.filter((d) => d !== 0).length;
   const target = dailyTarget;
