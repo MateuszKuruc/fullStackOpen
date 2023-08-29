@@ -5,10 +5,16 @@ import { NonSensitivePatientEntry } from "../../types";
 // const patients: PatientEntry[] = patientsData;
 // const patients = patientsData;
 
-const getEntries = (): NonSensitivePatientEntry[] => {
-  return patientsData;
+const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
+  return patientsData.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+    id,
+    name,
+    dateOfBirth,
+    gender,
+    occupation,
+  }));
 };
 
 export default {
-  getEntries,
+  getNonSensitiveEntries,
 };
