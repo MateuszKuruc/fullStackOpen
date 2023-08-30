@@ -1,3 +1,5 @@
+import Header from "./components/Header";
+
 const App = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
@@ -14,6 +16,12 @@ const App = () => {
       exerciseCount: 14,
     },
   ];
+
+  return (
+    <div>
+      <Header name={courseName} />
+    </div>
+  );
 
   return (
     <div>
