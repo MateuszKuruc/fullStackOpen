@@ -35,7 +35,7 @@ const App = () => {
     {
       name: "TypeScript in frontend",
       exerciseCount: 10,
-      description: "random description",
+      description: "a hard part",
       kind: "basic",
     },
   ];
