@@ -17,6 +17,8 @@ const App = () => {
     fetchDiaries();
   }, []);
 
+  // const create
+
   console.log("diaries in app component", diaries);
   return (
     <div>
