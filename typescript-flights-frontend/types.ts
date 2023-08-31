@@ -1,4 +1,4 @@
-interface NewNote {
+export interface NewDiary {
   date: number;
   id: number;
   visibility: string;
