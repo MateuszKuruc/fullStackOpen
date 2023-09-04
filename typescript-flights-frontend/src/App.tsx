@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import diaryService from "./services/diaries";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Notification from "./components/Notification";
 
 const App = () => {
@@ -41,7 +41,16 @@ const App = () => {
       await diaryService.addDiary(newNote);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log(error);
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+          console.log(axiosError.response.data);
+          setErrorMessage(
+            (axiosError.response.data as string) || "Error occured"
+          );
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 3000);
+        }
       }
     }
   };
