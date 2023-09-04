@@ -1,5 +1,5 @@
 export interface NewDiary {
-  date: number;
+  date: string;
   id: number;
   visibility: string;
   weather: string;
