@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import diaryService from "./services/diaries";
 import axios, { AxiosError } from "axios";
 import Notification from "./components/Notification";
+import { fetchedDiary } from "../types";
 
 const App = () => {
-  const [diaries, setDiaries] = useState<Array<any> | null>(null);
+  const [diaries, setDiaries] = useState<fetchedDiary[] | null>(null);
   const [date, setDate] = useState("");
   const [visibility, setVisibility] = useState("");
   const [weather, setWeather] = useState("");
@@ -105,10 +106,6 @@ const App = () => {
         </div>
         <div>
           weather
-          {/* <input
-            value={weather}
-            onChange={(event) => setWeather(event.target.value)}
-          /> */}
           <input
             type="radio"
             name="weather"

@@ -5,3 +5,10 @@ export interface NewDiary {
   weather: string;
   comment?: string;
 }
+
+export interface fetchedDiary {
+  id: number;
+  date: string;
+  weather: string;
+  visibility: string;
+}
