@@ -11,16 +11,17 @@ const App = () => {
   const [comment, setComment] = useState("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const fetchDiaries = async () => {
+    try {
+      const response = await diaryService.getAll();
+      const fetchedDiaries = response.data;
+      setDiaries(fetchedDiaries);
+    } catch (error) {
+      console.log("Error fetching diaries", error);
+    }
+  };
+  
   useEffect(() => {
-    const fetchDiaries = async () => {
-      try {
-        const response = await diaryService.getAll();
-        const fetchedDiaries = response.data;
-        setDiaries(fetchedDiaries);
-      } catch (error) {
-        console.log("Error fetching diaries", error);
-      }
-    };
     fetchDiaries();
   }, []);
 
@@ -39,6 +40,7 @@ const App = () => {
       };
 
       await diaryService.addDiary(newNote);
+      fetchDiaries();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
@@ -64,6 +66,7 @@ const App = () => {
         <div>
           date
           <input
+            type="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
           />
