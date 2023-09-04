@@ -20,7 +20,7 @@ const App = () => {
       console.log("Error fetching diaries", error);
     }
   };
-  
+
   useEffect(() => {
     fetchDiaries();
   }, []);
@@ -74,9 +74,34 @@ const App = () => {
         <div>
           visibility
           <input
-            value={visibility}
+            type="radio"
+            name="visibility"
+            value="poor"
             onChange={(event) => setVisibility(event.target.value)}
           />
+          <label htmlFor="poor">poor</label>
+          <input
+            type="radio"
+            name="visibility"
+            value="ok"
+            defaultChecked
+            onChange={(event) => setVisibility(event.target.value)}
+          />
+          <label htmlFor="ok">ok</label>
+          <input
+            type="radio"
+            name="visibility"
+            value="good"
+            onChange={(event) => setVisibility(event.target.value)}
+          />
+          <label htmlFor="good">good</label>
+          <input
+            type="radio"
+            name="visibility"
+            value="great"
+            onChange={(event) => setVisibility(event.target.value)}
+          />
+          <label htmlFor="great">great</label>
         </div>
         <div>
           weather
