@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import diaryService from "./services/diaries";
+import axios from "axios";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [diaries, setDiaries] = useState<Array<any> | null>(null);
@@ -7,6 +9,7 @@ const App = () => {
   const [visibility, setVisibility] = useState("");
   const [weather, setWeather] = useState("");
   const [comment, setComment] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -21,25 +24,32 @@ const App = () => {
     fetchDiaries();
   }, []);
 
-  const createDiary = (event: React.SyntheticEvent) => {
+  const createDiary = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    const id = Math.floor(Math.random() * 1000000);
-    console.log("data for new diary", date, id, visibility, weather, comment);
-    const newNote = {
-      date,
-      id,
-      visibility,
-      weather,
-      comment,
-    };
+    try {
+      const id = Math.floor(Math.random() * 1000000);
+      console.log("data for new diary", date, id, visibility, weather, comment);
+      const newNote = {
+        date,
+        id,
+        visibility,
+        weather,
+        comment,
+      };
 
-    diaryService.addDiary(newNote);
+      await diaryService.addDiary(newNote);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error);
+      }
+    }
   };
 
   console.log("diaries in app component", diaries);
   return (
     <div>
+      <Notification error={errorMessage} />
       <h3>New diary</h3>
       <form onSubmit={createDiary}>
         <div>
