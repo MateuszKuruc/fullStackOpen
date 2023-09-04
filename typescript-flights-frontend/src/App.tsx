@@ -105,10 +105,46 @@ const App = () => {
         </div>
         <div>
           weather
-          <input
+          {/* <input
             value={weather}
             onChange={(event) => setWeather(event.target.value)}
+          /> */}
+          <input
+            type="radio"
+            name="weather"
+            value="windy"
+            onChange={(event) => setWeather(event.target.value)}
           />
+          <label htmlFor="windy">windy</label>
+          <input
+            type="radio"
+            name="weather"
+            value="stormy"
+            onChange={(event) => setWeather(event.target.value)}
+          />
+          <label htmlFor="stormy">stormy</label>
+          <input
+            type="radio"
+            name="weather"
+            value="cloudy"
+            defaultChecked
+            onChange={(event) => setWeather(event.target.value)}
+          />
+          <label htmlFor="cloudy">cloudy</label>
+          <input
+            type="radio"
+            name="weather"
+            value="rainy"
+            onChange={(event) => setWeather(event.target.value)}
+          />
+          <label htmlFor="rainy">rainy</label>
+          <input
+            type="radio"
+            name="weather"
+            value="sunny"
+            onChange={(event) => setWeather(event.target.value)}
+          />
+          <label htmlFor="sunny">sunny</label>
         </div>
         <div>
           comment
