@@ -16,14 +16,6 @@ export interface PatientEntry {
   entries: Entry[];
 }
 
-export interface BaseEntry {
-  id: string;
-  description: string;
-  date: string;
-  specialist: string;
-  diagnosisCodes?: Array<DiagnosesEntry["code"]>;
-}
-
 export type NewPatientEntry = Omit<PatientEntry, "id">;
 
 export type NonSensitivePatientEntry = Omit<PatientEntry, "ssn" | "entries">;
@@ -41,9 +33,34 @@ export enum HealthCheckRating {
   "CriticalRisk" = 3,
 }
 
+export interface BaseEntry {
+  id: string;
+  description: string;
+  date: string;
+  specialist: string;
+  diagnosisCodes?: Array<DiagnosesEntry["code"]>;
+}
+
 export interface HealthCheckEntry extends BaseEntry {
   type: "HealthCheck";
   healthCheckRating: HealthCheckRating;
+}
+
+export interface HospitalEntry extends BaseEntry {
+  type: "Hospital";
+  discharge: {
+    date: string;
+    criteria: string;
+  };
+}
+
+export interface OccupationalHealthcareEntry extends BaseEntry {
+  type: "OccupationalHealthcare";
+  employerName: string;
+  sickLeave?: {
+    startDate: string;
+    endDate: string;
+  };
 }
 
 export type Entry =
