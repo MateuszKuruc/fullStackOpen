@@ -31,6 +31,17 @@ const addPatient = (entry: NewPatientEntry): PatientEntry => {
   return newPatientEntry;
 };
 
+// const addEntry = (entry: Entry, patientId: string): Entry => {
+//   const id = uuid();
+//   const newEntryWithId = { ...entry, id };
+//   const patient = getPatientById(patientId);
+//   if (patient) {
+//     patient.entries.push(newEntryWithId);
+//     return patient;
+//   }
+//   return newEntryWithId;
+// };
+
 export default {
   getNonSensitiveEntries,
   addPatient,
