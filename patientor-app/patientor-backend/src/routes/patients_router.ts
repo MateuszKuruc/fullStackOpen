@@ -1,6 +1,6 @@
 import express from "express";
 import patientsService from "../services/patientsService";
-import toNewPatientEntry from "../../utils";
+import { toNewPatientEntry, parseEntry } from "../../utils";
 
 const router = express.Router();
 
@@ -31,21 +31,16 @@ router.post("/", (req, res) => {
 
 router.post("/:id/entries", (req, res) => {
   try {
-    const patientId = req.params.id
-    const newEntry = req.body;
-
-    const patient = patientsService.getPatientById(patientId);
-
-    if (!patient) {
-      return res.status(404).json({ error: 'Patient not found' })
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const newEntry = parseEntry(req.body);
+    const patient = patientsService.addEntry(req.params.id, newEntry);
+    res.send(patient);
+  } catch (error: unknown) {
+    let errorMessage = "Something went wrong.";
+    if (error instanceof Error) {
+      errorMessage += " Error: " + error.message;
     }
-
-    patient.entries.push(newEntry)
-
-    res.status(201).json(patient);
-    
-
-
+    res.status(400).send(errorMessage);
   }
 });
 

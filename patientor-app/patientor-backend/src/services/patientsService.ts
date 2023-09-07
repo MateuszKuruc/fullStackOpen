@@ -3,6 +3,7 @@ import {
   NonSensitivePatientEntry,
   PatientEntry,
   NewPatientEntry,
+  EntryWithoutId,
 } from "../../types";
 import { v1 as uuid } from "uuid";
 
@@ -31,19 +32,27 @@ const addPatient = (entry: NewPatientEntry): PatientEntry => {
   return newPatientEntry;
 };
 
-// const addEntry = (entry: Entry, patientId: string): Entry => {
-//   const id = uuid();
-//   const newEntryWithId = { ...entry, id };
-//   const patient = getPatientById(patientId);
-//   if (patient) {
-//     patient.entries.push(newEntryWithId);
-//     return patient;
-//   }
-//   return newEntryWithId;
-// };
+const addEntry = (
+  id: string,
+  newEntry: EntryWithoutId
+): PatientEntry | undefined => {
+  const patient = patientsData.find((p) => p.id === id);
+  console.log(newEntry);
+
+  if (patient) {
+    const entry = {
+      ...newEntry,
+      id: uuid(),
+    };
+    patient.entries = patient.entries.concat(entry);
+  }
+
+  return patient;
+};
 
 export default {
   getNonSensitiveEntries,
   addPatient,
   getPatientById,
+  addEntry,
 };
