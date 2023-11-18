@@ -19,8 +19,8 @@ const PersonForm = (props) => {
         />
       </div>
       <div>
-        <button type={props.type} onClick={props.handleNewPerson}>
-          add
+        <button className="button" type={props.type} onClick={props.handleNewPerson}>
+          <h4 style={{color: "#374151"}}>Submit</h4>
         </button>
       </div>
     </div>
