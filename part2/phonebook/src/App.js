@@ -143,17 +143,19 @@ const App = () => {
       <Notification message={successMessage} />
       <Error error={errorMessage} />
       <Filter handleInput={createSearch} />
-      <h2>Add new</h2>
-      <form>
-        <PersonForm
-          name={newName}
-          number={newNumber}
-          handleNewName={createNewName}
-          handleNewNumber={createNewNumber}
-          type="submit"
-          handleNewPerson={addNewPerson}
-        />
-      </form>
+      <div className="formContainer">
+        <h3>Contact form</h3>
+        <form>
+          <PersonForm
+            name={newName}
+            number={newNumber}
+            handleNewName={createNewName}
+            handleNewNumber={createNewNumber}
+            type="submit"
+            handleNewPerson={addNewPerson}
+          />
+        </form>
+      </div>
       <h2>Numbers</h2>
       <Persons display={personsToShow} deleteData={deletePerson} />
     </div>

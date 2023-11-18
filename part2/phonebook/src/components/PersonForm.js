@@ -1,16 +1,18 @@
 const PersonForm = (props) => {
   return (
-    <div>
-      <div>
-        name:
-        <input value={props.name} onChange={props.handleNewName} />
+    <div className="form">
+      <div className="formFields">
+        <h4>Name</h4>
+        <input className="inputField" value={props.name} onChange={props.handleNewName} />
+      </div>
+      <div className="formFields">
+        <h4>Number</h4>
+        <input className="inputField" value={props.number} onChange={props.handleNewNumber} />
       </div>
       <div>
-        number:
-        <input value={props.number} onChange={props.handleNewNumber} />
-      </div>
-      <div>
-        <button type={props.type} onClick={props.handleNewPerson}>add</button>
+        <button type={props.type} onClick={props.handleNewPerson}>
+          add
+        </button>
       </div>
     </div>
   );
