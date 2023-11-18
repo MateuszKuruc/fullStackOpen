@@ -47,6 +47,7 @@ h4 {
   height: 100vh;
   border: 2px solid blue;
   background-color: #f5f5f5;
+  background: linear-gradient(to left, #f5f5f5, #fdba74)
 }
 
 .header {
