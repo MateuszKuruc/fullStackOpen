@@ -6,7 +6,13 @@ const Footer = () => {
     <div className="footer">
       <p className="footerText">
         Mateusz Kuruc © 2023
-        <FaGithub size={30} />
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://github.com/MateuszKuruc"
+        >
+          <FaGithub size={30} className="icon" />
+        </a>
       </p>
     </div>
   );

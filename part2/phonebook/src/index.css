@@ -1,5 +1,5 @@
 h1 {
-  color: #1d4ed8;
+  color: black;
   font-size: 46px;
 }
 
@@ -184,7 +184,8 @@ h4 {
 
 .buttonText {
   font-size: 20px;
-  color: #f5f5f5;
+  color: black;
+  font-weight: bold;
 }
 
 .footerText {
@@ -203,4 +204,14 @@ h4 {
   padding: 2rem;
   background-color: #f59e0b;
   margin-top: 2rem;
+}
+
+.icon {
+  color: black;
+}
+
+.icon:hover {
+  transform: scale(1.05);
+  color: white;
+  transition: 0.3s ease-in-out;
 }
