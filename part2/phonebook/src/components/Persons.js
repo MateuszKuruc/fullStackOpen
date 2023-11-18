@@ -10,7 +10,12 @@ const Persons = (props) => {
             <span className="contactText">{person.name}</span>
 
             <span className="contactText">{person.number}</span>
-            <button className="deleteButton" onClick={() => props.deleteData(person)}>delete</button>
+            <button
+              className="deleteButton"
+              onClick={() => props.deleteData(person)}
+            >
+              <p className="buttonText">Delete</p>
+            </button>
           </div>
         </div>
       ))}

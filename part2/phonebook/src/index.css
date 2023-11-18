@@ -169,15 +169,21 @@ h4 {
 }
 
 .deleteButton {
-  width: 200px;
+  width: 150px;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 2px solid #991b1b;
   background-color: #f87171;
+  
 }
 
 .deleteButton:hover {
   background-color: #ef4444;
   transform: scale(1.05);
   transition: 0.3s ease-in-out;
+}
+
+.buttonText {
+    font-size: 20px;
+    color: #f5f5f5;
 }
