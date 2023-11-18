@@ -154,7 +154,6 @@ const App = () => {
       </div>
       <Filter handleInput={createSearch} />
       <div className="formContainer">
-        {/* <h3>Contact form</h3> */}
         <form>
           <PersonForm
             name={newName}
