@@ -1,11 +1,9 @@
 const Persons = (props) => {
   return (
     <div className="contactContainer">
-      <h3
-       className="contactHeader"
-      >
-        Contact list
-      </h3>
+      <div className="contactHeader">
+        <h3 style={{ fontSize: "36px" }}>Contact list</h3>
+      </div>
       {props.display.map((person) => (
         <div key={person.id}>
           <div className="contactDetails">
