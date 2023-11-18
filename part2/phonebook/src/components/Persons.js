@@ -7,9 +7,10 @@ const Persons = (props) => {
       {props.display.map((person) => (
         <div key={person.id}>
           <div className="contactDetails">
-            <p>{person.name}</p>
-            <p>{person.number} </p>
-            <button onClick={() => props.deleteData(person)}>delete</button>
+            <span className="contactText">{person.name}</span>
+
+            <span className="contactText">{person.number}</span>
+            <button className="deleteButton" onClick={() => props.deleteData(person)}>delete</button>
           </div>
         </div>
       ))}

@@ -127,7 +127,6 @@ h4 {
 .contactContainer {
   display: flex;
   flex-direction: column;
-  border: 2px solid;
   width: 700px;
   padding: 1rem;
   padding-top: 0rem;
@@ -140,7 +139,7 @@ h4 {
 .contactDetails {
   display: "flex";
   border: 2px solid #fff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   background-color: #2563eb;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -156,4 +155,29 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 3px solid black;
+}
+
+.contactText {
+  font-size: 20px;
+  width: 200px;
+  gap: 1rem;
+  display: inline-block;
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #f5f5f5;
+}
+
+.deleteButton {
+  width: 200px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid #991b1b;
+  background-color: #f87171;
+}
+
+.deleteButton:hover {
+  background-color: #ef4444;
+  transform: scale(1.05);
+  transition: 0.3s ease-in-out;
 }
