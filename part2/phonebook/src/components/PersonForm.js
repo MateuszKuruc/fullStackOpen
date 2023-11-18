@@ -19,8 +19,12 @@ const PersonForm = (props) => {
         />
       </div>
       <div>
-        <button className="button" type={props.type} onClick={props.handleNewPerson}>
-          <h4 style={{color: "#374151"}}>Submit</h4>
+        <button
+          className="button"
+          type={props.type}
+          onClick={props.handleNewPerson}
+        >
+          <h4 style={{ color: "#374151" }}>Submit</h4>
         </button>
       </div>
     </div>

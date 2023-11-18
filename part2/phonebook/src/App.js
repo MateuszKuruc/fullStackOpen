@@ -156,8 +156,16 @@ const App = () => {
           />
         </form>
       </div>
-      <h2>Numbers</h2>
-      <Persons display={personsToShow} deleteData={deletePerson} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "2rem",
+        }}
+      >
+        <Persons display={personsToShow} deleteData={deletePerson} />
+      </div>
     </div>
   );
 };
