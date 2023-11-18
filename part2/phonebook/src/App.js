@@ -6,6 +6,7 @@ import axios from "axios";
 import serviceNumbers from "./services/numbers";
 import Notification from "./components/Notification";
 import Error from "./components/Error";
+import { FaAddressBook } from "react-icons/fa";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -85,12 +86,12 @@ const App = () => {
           }
         })
         .catch((error) => {
-          
-          setErrorMessage(`Name needs to be at least 3 and number 8 characters long, with initial 2 or 3 numbers followed by hyphen`);
+          setErrorMessage(
+            `Name needs to be at least 3 and number 8 characters long, with initial 2 or 3 numbers followed by hyphen`
+          );
           setTimeout(() => {
             setErrorMessage(null);
           }, 3000);
-  
         });
     }
 
@@ -134,8 +135,11 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h2>Phonebook</h2>
+    <div className="container">
+      <div className="header">
+        <h2>Phonebook</h2>
+        <FaAddressBook size={30} />
+      </div>
       <Notification message={successMessage} />
       <Error error={errorMessage} />
       <Filter handleInput={createSearch} />
