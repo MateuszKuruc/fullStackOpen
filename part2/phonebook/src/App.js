@@ -14,7 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [searchPerson, setSearchPerson] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("sdsadsa");
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
@@ -136,12 +136,22 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="header">
-        <h1>Phonebook</h1>
-        <FaAddressBook size={30} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div className="header">
+          <h1>Phonebook</h1>
+          <FaAddressBook size={30} />
+        </div>
+        <div>
+          <Notification message={successMessage} />
+          <Error error={errorMessage} />
+        </div>
       </div>
-      <Notification message={successMessage} />
-      <Error error={errorMessage} />
       <Filter handleInput={createSearch} />
       <div className="formContainer">
         {/* <h3>Contact form</h3> */}
