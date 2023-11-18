@@ -24,24 +24,23 @@ h4 {
 }
 
 .success {
-  /* color: green; */
   color: white;
   background-color: #065f46;
   padding: 10px;
   font-size: 26px;
   margin-bottom: 10px;
   border: solid 2px white;
-  width: 300px;
-  
+  border-radius: 0.55rem;
 }
 
 .error {
-  color: red;
-  background-color: lightgray;
+  color: white;
+  background-color: #f87171;
   padding: 10px;
   font-size: 26px;
   margin-bottom: 10px;
-  border: solid 5px red;
+  border: solid 2px white;
+  border-radius: 0.5rem;
 }
 
 .container {

@@ -14,7 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [searchPerson, setSearchPerson] = useState("");
-  const [successMessage, setSuccessMessage] = useState("sdsadsa");
+  const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
