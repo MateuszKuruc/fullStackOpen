@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
 import serviceNumbers from "./services/numbers";
 import Notification from "./components/Notification";
 import Error from "./components/Error";
 import { FaAddressBook } from "react-icons/fa";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -176,6 +176,7 @@ const App = () => {
       >
         <Persons display={personsToShow} deleteData={deletePerson} />
       </div>
+      <Footer />
     </div>
   );
 };
