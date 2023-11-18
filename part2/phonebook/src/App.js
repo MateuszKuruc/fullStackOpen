@@ -137,14 +137,14 @@ const App = () => {
   return (
     <div className="container">
       <div className="header">
-        <h2>Phonebook</h2>
+        <h1>Phonebook</h1>
         <FaAddressBook size={30} />
       </div>
       <Notification message={successMessage} />
       <Error error={errorMessage} />
       <Filter handleInput={createSearch} />
       <div className="formContainer">
-        <h3>Contact form</h3>
+        {/* <h3>Contact form</h3> */}
         <form>
           <PersonForm
             name={newName}
