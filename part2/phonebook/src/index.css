@@ -56,17 +56,18 @@ h4 {
 .header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 1.5rem;
   padding: 2rem;
   background-color: #d97706;
   width: 100%;
   border: 4px solid black;
   margin-bottom: 2rem;
+  padding-left: 10rem;
 }
 
 .filter {
-  width: 300px;
+  width: 400px;
   height: 24px;
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -209,7 +210,7 @@ h4 {
   border-top: 4px solid black;
   margin-top: auto;
   padding: 2rem;
-  background-color: #f59e0b;
+  background-color: #d97706;
   margin-top: 2rem;
 }
 
