@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const baseUrl = "/api/persons";
+// local
+// const baseUrl = "/api/persons";
+
+// production build
+const baseUrl = "https://fullstack-phonebook-7wl2.onrender.com/api/persons";
 
 const getAll = () => {
   const request = axios.get(baseUrl);
