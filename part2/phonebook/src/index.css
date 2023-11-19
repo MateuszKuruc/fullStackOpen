@@ -51,6 +51,9 @@ h4 {
   padding: 0;
   background-color: #f5f5f5;
   background: linear-gradient(to left, #f5f5f5, #fdba74);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -212,7 +215,7 @@ h4 {
   margin-top: auto;
   padding: 2rem;
   background-color: #d97706;
-  margin-top: 2rem;
+  margin-top: auto;
 }
 
 .icon {

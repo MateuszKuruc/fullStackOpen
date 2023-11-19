@@ -171,6 +171,7 @@ const App = () => {
           alignItems: "center",
           justifyContent: "center",
           marginTop: "2rem",
+          marginBottom: "4rem",
         }}
       >
         <Persons display={personsToShow} deleteData={deletePerson} />
