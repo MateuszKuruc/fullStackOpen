@@ -1,5 +1,5 @@
 h1 {
-  color: black;
+  color: #374151;
   font-size: 46px;
 }
 
@@ -64,6 +64,7 @@ h4 {
   border: 4px solid black;
   margin-bottom: 2rem;
   padding-left: 10rem;
+  color: #374151;
 }
 
 .filter {
