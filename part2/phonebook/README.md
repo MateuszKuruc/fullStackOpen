@@ -3,6 +3,8 @@
 
 [Backend repository](https://github.com/MateuszKuruc/fullStackOpen-nodeJS/tree/main/backend-phonebook)
 
+<p>In case of any questions, feel free to contact me directly.</p>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
