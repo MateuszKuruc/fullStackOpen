@@ -1,3 +1,8 @@
+<h3>Backend code</h3>
+<p>If you are interested in backend code for this app</p>
+
+[Backend repository](https://github.com/MateuszKuruc/fullStackOpen-nodeJS/tree/main/backend-phonebook)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
